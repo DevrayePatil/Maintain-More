@@ -57,10 +57,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="31dp"
+                app:startIconDrawable="@drawable/ic_email"
+                app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:layout_constraintTop_toBottomOf="@+id/textViewTitle">
+                app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_email"
@@ -78,6 +81,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                app:startIconDrawable="@drawable/ic_lock"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail"
