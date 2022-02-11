@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CheckstyleConfigurable">
+    <option name="suppFilterFilename" value="" />
+    <option name="suppCommentFilter" value="false" />
+    <option name="offComment" value="CHECKSTYLE\:OFF" />
+    <option name="onComment" value="CHECKSTYLE\:ON" />
+    <option name="checkFormat" value=".*" />
+    <option name="messageFormat" value="" />
+    <option name="checkCPP" value="true" />
+    <option name="checkC" value="true" />
+    <option name="suppNearbyCommentFilter" value="false" />
+    <option name="snCommentFormat" value="SUPPRESS CHECKSTYLE (\w+)" />
+    <option name="snCheckFormat" value="$1" />
+    <option name="snMessageFormat" value="" />
+    <option name="snInfluenceFormat" value="0" />
+    <option name="snCheckCPP" value="true" />
+    <option name="snCheckC" value="true" />
+    <option name="pathToUserRulesConfiguration" value="" />
+    <option name="pathToJarWithRules" value="" />
+  </component>
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26205128205128203" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/background_gender.xml" value="0.26614583333333336" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/background_item_picker.xml" value="0.1680921052631579" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/box_shadow.xml" value="0.26614583333333336" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/card_border.xml" value="0.26614583333333336" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/change_picture_button_background.xml" value="0.26614583333333336" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/ic_booking.xml" value="0.14375" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/ic_camera.xml" value="0.26614583333333336" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/ic_google.xml" value="0.192" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/ic_group_1.xml" value="0.26614583333333336" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/ic_home.xml" value="0.26153846153846155" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/ic_iconmonstr_book_24.xml" value="0.26614583333333336" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14375" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.26614583333333336" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/ic_vector.xml" value="0.14010416666666667" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/ic_vector_1.xml" value="0.26614583333333336" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/ic_vector_2.xml" value="0.26614583333333336" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/jhgfds.xml" value="0.14375" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/profile_background.xml" value="0.26614583333333336" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/searchViewBacKground.xml" value="0.26614583333333336" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/search_view_ackground.xml" value="0.26614583333333336" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/splash_screen.xml" value="0.13958333333333334" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/drawable/toolbar_background.xml" value="0.26614583333333336" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_detailed_view.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_edit_profile.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_manage_address.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_maps.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_navigation.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_service_booking.xml" value="0.1" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_service_details.xml" value="0.176" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_settings.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_signup.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_view.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_view_booking.xml" value="0.20512820512820512" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_view_details.xml" value="0.12760416666666666" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_view_service.xml" value="0.12708333333333333" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/activity_wallet.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/booking_card_for_user.xml" value="0.20253164556962025" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/card_booking_for_user.xml" value="0.21333333333333335" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/fragment_booking.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/fragment_home.xml" value="0.24947916666666667" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/fragment_notifications.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/image_slider.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/services_card.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/layout/techinician_activity_signup.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/menu/bottom_menu.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/menu/toolbar_menu.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26614583333333336" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/MaintainMore/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.14375" />
+      </map>
+    </option>
+  </component>
+  <component name="FindBugsConfigurable">
+    <option name="make" value="true" />
+    <option name="effort" value="default" />
+    <option name="priority" value="Medium" />
+    <option name="excludeFilter" value="" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="SuppressionsComponent">
+    <option name="suppComments" value="[]" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
+  </component>
+</project>
