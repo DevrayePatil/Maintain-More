@@ -120,7 +120,7 @@ public class SignupActivity extends AppCompatActivity {
                             String userID = Objects.requireNonNull(task.getResult().getUser()).getUid();
 
                             Map<String, String> user = new HashMap<>();
-                            user.put("name", userName);
+                            user.put("serviceName", userName);
                             user.put("email", emailId);
                             user.put("password", Password);
                             user.put("walletBalanceInINR","0");

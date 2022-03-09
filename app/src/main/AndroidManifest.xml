@@ -43,8 +43,9 @@
 
 
         <activity
-            android:name=".ServiceBookingActivity"
-            android:exported="false" />
+            android:name=".BookServiceActivity"
+            android:exported="false"
+            />
         <activity
             android:name=".SignupActivity"
             android:exported="false" />

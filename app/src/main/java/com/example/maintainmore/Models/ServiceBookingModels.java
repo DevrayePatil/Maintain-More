@@ -1,21 +1,24 @@
 package com.example.maintainmore.Models;
 
 public class ServiceBookingModels {
-    String bookingID, userID, serviceName, serviceDescription,
+    String bookingID, userID, assignedTechnician,
+            serviceName, serviceDescription,
             serviceType, serviceIconUrl, visitingDate, visitingTime,
             serviceRequiredTime, bookingDate, bookingTime, servicePrice,
             servicesForMale, servicesForFemale, totalServices, totalServicesPrice,
-            cancellationTill, displayStatus;
+            cancellationTill, serviceStatus;
 
     public ServiceBookingModels(
-            String bookingID, String userID, String serviceName, String serviceDescription,
+            String bookingID, String userID, String assignedTechnician,
+            String serviceName, String serviceDescription,
             String serviceType, String serviceIconUrl, String visitingDate,String visitingTime,
             String serviceRequiredTime, String bookingDate, String bookingTime, String servicePrice,
             String servicesForMale, String servicesForFemale, String totalServices, String totalPrice,
-            String cancellationTill, String displayStatus
+            String cancellationTill, String serviceStatus
     ) {
         this.bookingID = bookingID;
         this.userID = userID;
+        this.assignedTechnician = assignedTechnician;
         this.serviceName = serviceName;
         this.serviceDescription = serviceDescription;
         this.serviceType = serviceType;
@@ -31,31 +34,7 @@ public class ServiceBookingModels {
         this.totalServices = totalServices;
         this.totalServicesPrice = totalPrice;
         this.cancellationTill = cancellationTill;
-        this.displayStatus = displayStatus;
-    }
-
-    public String getServicesForMale() {
-        return servicesForMale;
-    }
-
-    public void setServicesForMale(String servicesForMale) {
-        this.servicesForMale = servicesForMale;
-    }
-
-    public String getServicesForFemale() {
-        return servicesForFemale;
-    }
-
-    public void setServicesForFemale(String servicesForFemale) {
-        this.servicesForFemale = servicesForFemale;
-    }
-
-    public String getVisitingTime() {
-        return visitingTime;
-    }
-
-    public void setVisitingTime(String visitingTime) {
-        this.visitingTime = visitingTime;
+        this.serviceStatus = serviceStatus;
     }
 
     public String getBookingID() {
@@ -72,6 +51,14 @@ public class ServiceBookingModels {
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public String getAssignedTechnician() {
+        return assignedTechnician;
+    }
+
+    public void setAssignedTechnician(String assignedTechnician) {
+        this.assignedTechnician = assignedTechnician;
     }
 
     public String getServiceName() {
@@ -114,6 +101,14 @@ public class ServiceBookingModels {
         this.visitingDate = visitingDate;
     }
 
+    public String getVisitingTime() {
+        return visitingTime;
+    }
+
+    public void setVisitingTime(String visitingTime) {
+        this.visitingTime = visitingTime;
+    }
+
     public String getServiceRequiredTime() {
         return serviceRequiredTime;
     }
@@ -146,6 +141,22 @@ public class ServiceBookingModels {
         this.servicePrice = servicePrice;
     }
 
+    public String getServicesForMale() {
+        return servicesForMale;
+    }
+
+    public void setServicesForMale(String servicesForMale) {
+        this.servicesForMale = servicesForMale;
+    }
+
+    public String getServicesForFemale() {
+        return servicesForFemale;
+    }
+
+    public void setServicesForFemale(String servicesForFemale) {
+        this.servicesForFemale = servicesForFemale;
+    }
+
     public String getTotalServices() {
         return totalServices;
     }
@@ -170,11 +181,11 @@ public class ServiceBookingModels {
         this.cancellationTill = cancellationTill;
     }
 
-    public String getDisplayStatus() {
-        return displayStatus;
+    public String getServiceStatus() {
+        return serviceStatus;
     }
 
-    public void setDisplayStatus(String displayStatus) {
-        this.displayStatus = displayStatus;
+    public void setServiceStatus(String serviceStatus) {
+        this.serviceStatus = serviceStatus;
     }
 }

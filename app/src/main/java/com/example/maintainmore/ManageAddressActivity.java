@@ -158,7 +158,7 @@ public class ManageAddressActivity extends AppCompatActivity {
 
                     LocationServices.getFusedLocationProviderClient(getApplicationContext())
                             .requestLocationUpdates(locationRequest, new LocationCallback() {
-                                @SuppressLint({"SetTextI18n", "LongLogTag"})
+                                @SuppressLint( "LongLogTag")
                                 @Override
                                 public void onLocationResult(@NonNull LocationResult locationResult) {
                                     super.onLocationResult(locationResult);

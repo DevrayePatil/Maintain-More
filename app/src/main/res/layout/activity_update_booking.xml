@@ -86,7 +86,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="end"
                     android:layout_weight="1"
-                    android:background="@drawable/background_item_picker"
+                    android:background="@drawable/bg_item_picker"
                     android:padding="@dimen/normal_half_margin"
                     android:text="@string/demo_time">
 
@@ -162,7 +162,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="end"
                     android:layout_weight="1"
-                    android:background="@drawable/background_item_picker"
+                    android:background="@drawable/bg_item_picker"
                     android:padding="@dimen/normal_half_margin"
                     android:text="@string/demo_time">
 
@@ -448,7 +448,7 @@
                     android:layout_marginEnd="5dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/design_default_color_error"
-                    android:text="@string/cancel"
+                    android:text="@string/cancel_booking"
                     android:textAllCaps="false"
                     tools:ignore="ButtonStyle" />
 
@@ -458,7 +458,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
-                    android:text="@string/update"
+                    android:text="@string/update_booking"
                     android:textAllCaps="false"
                     tools:ignore="ButtonStyle,TextContrastCheck" />
 

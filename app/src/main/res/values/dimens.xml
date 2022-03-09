@@ -13,4 +13,8 @@
 
     <dimen name="heading_text">18sp</dimen>
 
+
+
+    <dimen name="booking_card_text_size">16sp</dimen>
+
 </resources>

@@ -1,5 +1,7 @@
 package com.example.maintainmore;
 
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.splashscreen.SplashScreen;
@@ -7,6 +9,7 @@ import androidx.core.splashscreen.SplashScreen;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,28 +17,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
 
 
-public class ServiceBookingActivity extends AppCompatActivity {
+public class BookServiceActivity extends AppCompatActivity {
 
-    private static final String TAG = "ServiceDetailsActivityInfo";
+    private static final String TAG = "BookServiceActivityInfo";
     private final int cancelTillHour = 1;
 
     FirebaseAuth firebaseAuth;
@@ -43,7 +47,7 @@ public class ServiceBookingActivity extends AppCompatActivity {
     FirebaseFirestore db;
     Calendar calendar;
 
-    String userID;
+    String userID, technicianID = "";
 
     Toolbar toolbar;
     Button buttonCancel, buttonBook;
@@ -56,10 +60,11 @@ public class ServiceBookingActivity extends AppCompatActivity {
 
     int numberOfServicesForMale = 0;
     int numberOfServicesForFemale = 0;
-    int servicePrice = 0;
     int totalServices = 0;
-    int totalPrice = 0;
+    int servicePrice = 0;
+    int totalServicesPrice = 0;
 
+    boolean availableTechnician = false;
 
     String chosenDate= "";
     String chosenTime = "";
@@ -67,13 +72,15 @@ public class ServiceBookingActivity extends AppCompatActivity {
     String bookingDate = "";
     String bookingTime = "";
 
-    String name, description, serviceType, requiredTime, price, iconUrl, backgroundImage;
+    String technicianName, technicianEmail, technicianPhoneNumber;
+
+    String serviceName, serviceDescription, serviceType, requiredTime, price, iconUrl, backgroundImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SplashScreen.installSplashScreen(this);
-        setContentView(R.layout.activity_service_booking);
+        setContentView(R.layout.activity_book_service);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -108,53 +115,94 @@ public class ServiceBookingActivity extends AppCompatActivity {
 
     public void BookService() {
 
-        Map<String,String> bookService = new HashMap<>();
+
+//        if (totalServices <= 0){
+//            Toast.makeText(getApplicationContext(), "Please Select at least 1 Service", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//        if (chosenDate.equals("")){
+//            Toast.makeText(getApplicationContext(), "Please Choose service Date", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//        if (chosenTime.equals("")){
+//            Toast.makeText(getApplicationContext(), "Please Choose service Time", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+
+        db.collection("Technicians").addSnapshotListener((value, error) -> {
+
+            assert value != null;
+            for (DocumentSnapshot snapshot: value){
+
+                String approvalStatus = snapshot.getString("approvalStatus");
+                String availabilityStatus = snapshot.getString("availabilityStatus");
+
+                if (approvalStatus != null && approvalStatus.equals("Approved")) {
+                    if (availabilityStatus != null && availabilityStatus.equals("Free")) {
+
+                        availableTechnician = true;
+
+                        technicianID = snapshot.getId();
+                        technicianName = snapshot.getString("serviceName");
+                        technicianEmail = snapshot.getString("email");
+                        technicianPhoneNumber = snapshot.getString("phoneNumber");
+                    }
+                }
+            }
+        });
+
+        new Handler().postDelayed(() -> {
+
+            if(!availableTechnician) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Booking");
+                builder.setMessage("Our any technician not available at this time \nplease select another date/time");
+                builder.setPositiveButton("Ok", (dialogInterface, i) -> dialogInterface.dismiss());
+                builder.show();
+
+                return;
+            }
+            if (!technicianID.equals("")) {
 
 
-        if (totalServices <= 0){
-            Toast.makeText(getApplicationContext(), "Please Select at least 1 Service", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (chosenDate.equals("")){
-            Toast.makeText(getApplicationContext(), "Please Choose service Date", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (chosenTime.equals("")){
-            Toast.makeText(getApplicationContext(), "Please Choose service Time", Toast.LENGTH_SHORT).show();
-            return;
-        }
+                Intent intent = new Intent(this, BookingPaymentActivity.class);
 
-        if (numberOfServicesForMale != 0){
-            bookService.put("servicesForMale", String.valueOf(numberOfServicesForMale));
-        }
-        if (numberOfServicesForFemale != 0){
-            bookService.put("servicesForFemale", String.valueOf(numberOfServicesForFemale));
-        }
+                intent.putExtra("technicianID", technicianID);
+                intent.putExtra("requiredTime", requiredTime);
+                intent.putExtra("visitingDate", chosenDate);
+                intent.putExtra("visitingTime", chosenTime);
 
+                intent.putExtra("serviceType",serviceType);
+                intent.putExtra("serviceIcon",iconUrl);
+                intent.putExtra("serviceName",serviceName);
+                intent.putExtra("serviceDescription", serviceDescription);
+                intent.putExtra("totalServices", String.valueOf(totalServices));
+                intent.putExtra("servicePrice", String.valueOf(servicePrice));
+                intent.putExtra("totalServicesPrice", String.valueOf(totalServicesPrice));
+                intent.putExtra("bookingDate", bookingDate);
+                intent.putExtra("bookingTime",bookingTime);
+                intent.putExtra("visitingDate", chosenDate);
+                intent.putExtra("visitingTime",chosenTime);
+                intent.putExtra("cancelTillHour", cancellationTime);
 
-        bookService.put("whoBookedService", userID);
-        bookService.put("serviceName",name);
-        bookService.put("serviceDescription",description);
-        bookService.put("totalPrice", String.valueOf(totalPrice));
-        bookService.put("totalServices", String.valueOf(totalServices));
-        bookService.put("serviceIcon",iconUrl);
-        bookService.put("requiredTime", requiredTime);
-        bookService.put("servicePrice", String.valueOf(servicePrice));
-        bookService.put("visitingDate", chosenDate);
-        bookService.put("bookingDate", bookingDate);
-        bookService.put("cancelTillHour", cancellationTime);
-        bookService.put("visitingTime",chosenTime);
-        bookService.put("bookingTime",bookingTime);
+                intent.putExtra("bookingStatus","booked");
 
-        db.collection("Bookings").document().set(bookService).addOnSuccessListener(unused -> {
-            Toast.makeText(this, "Booking Completed", Toast.LENGTH_SHORT).show();
-            finish();
+                Log.d(TAG,"Services" + totalServices);
 
-        }).addOnFailureListener(e ->
-                Toast.makeText(this, "Booking Failed: " + e, Toast.LENGTH_SHORT).show()
-        );
+                if (numberOfServicesForMale != 0){
+                    intent.putExtra("servicesForMale", String.valueOf(numberOfServicesForMale));
+                }
+                if (numberOfServicesForFemale != 0){
+                    intent.putExtra("servicesForFemale", String.valueOf(numberOfServicesForFemale));
+                }
+
+                startActivity(intent);
+            }
+
+        },100);
 
     }
+
 
     @SuppressLint("SimpleDateFormat")
     private void TimePickerForService() {
@@ -233,8 +281,8 @@ public class ServiceBookingActivity extends AppCompatActivity {
                 numberPickerForFemale.setText(String.valueOf(numberOfServicesForFemale));
                 displayTotalItems.setText(String.valueOf(totalServices));
 
-                totalPrice = servicePrice * totalServices;
-                displayTotalPrice.setText(String.valueOf(totalPrice));
+                totalServicesPrice = servicePrice * totalServices;
+                displayTotalPrice.setText(String.valueOf(totalServicesPrice));
             }
         });
 
@@ -246,8 +294,8 @@ public class ServiceBookingActivity extends AppCompatActivity {
                 numberPickerForFemale.setText(String.valueOf(numberOfServicesForFemale));
                 displayTotalItems.setText(String.valueOf(totalServices));
 
-                totalPrice = servicePrice * totalServices;
-                displayTotalPrice.setText(String.valueOf(totalPrice));
+                totalServicesPrice = servicePrice * totalServices;
+                displayTotalPrice.setText(String.valueOf(totalServicesPrice));
             }
             else {
                 Toast.makeText(this, "You Can't Choose More then 5", Toast.LENGTH_SHORT).show();
@@ -272,8 +320,8 @@ public class ServiceBookingActivity extends AppCompatActivity {
                 numberPicker.setText(String.valueOf(numberOfServicesForMale));
                 displayTotalItems.setText(String.valueOf(totalServices));
 
-                totalPrice = servicePrice * totalServices;
-                displayTotalPrice.setText(String.valueOf(totalPrice));
+                totalServicesPrice = servicePrice * totalServices;
+                displayTotalPrice.setText(String.valueOf(totalServicesPrice));
             }
         });
 
@@ -284,8 +332,8 @@ public class ServiceBookingActivity extends AppCompatActivity {
                 numberPicker.setText(String.valueOf(numberOfServicesForMale));
                 displayTotalItems.setText(String.valueOf(totalServices));
 
-                totalPrice = servicePrice * totalServices;
-                displayTotalPrice.setText(String.valueOf(totalPrice));
+                totalServicesPrice = servicePrice * totalServices;
+                displayTotalPrice.setText(String.valueOf(totalServicesPrice));
             }
             else {
                 Toast.makeText(this, "You Can't Choose More then 5", Toast.LENGTH_SHORT).show();
@@ -297,11 +345,11 @@ public class ServiceBookingActivity extends AppCompatActivity {
 
     private void SetDataToView() {
         //        Toolbar
-        Objects.requireNonNull(getSupportActionBar()).setTitle(name);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(serviceName);
         Glide.with(this).load(backgroundImage).placeholder(R.drawable.ic_account).into(imageBackground);
 
-        displayServiceName.setText(name);
-        displayServiceDescription.setText(description);
+        displayServiceName.setText(serviceName);
+        displayServiceDescription.setText(serviceDescription);
         displayRequiredTime.setText(requiredTime);
         displayServicePrice.setText(price);
     }
@@ -310,8 +358,8 @@ public class ServiceBookingActivity extends AppCompatActivity {
     private void GetDataFromCard(){
         Intent intent = getIntent();
 
-        name = intent.getStringExtra("Name");
-        description = intent.getStringExtra("Description");
+        serviceName = intent.getStringExtra("Name");
+        serviceDescription = intent.getStringExtra("Description");
         serviceType = intent.getStringExtra("ServiceType");
         requiredTime = intent.getStringExtra("RequiredTime");
         price = intent.getStringExtra("Price");
@@ -320,11 +368,11 @@ public class ServiceBookingActivity extends AppCompatActivity {
 
         iconUrl = intent.getStringExtra("IconUrl");
         backgroundImage = intent.getStringExtra("BackgroundImageUrl");
-        name = intent.getStringExtra("Name");
+        serviceName = intent.getStringExtra("Name");
 
 
-        Log.i(TAG,"Name: " + name);
-        Log.i(TAG,"Description: " + description);
+        Log.i(TAG,"Name: " + serviceName);
+        Log.i(TAG,"Description: " + serviceDescription);
         Log.i(TAG,"ServiceType: " + serviceType);
         Log.i(TAG,"Required time: " + requiredTime);
         Log.i(TAG,"Price: " + price);

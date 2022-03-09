@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.NotificationsFragment">
+    tools:context=".Fragments.BookingsCompletedFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleView_ongoing_bookings"
+        android:id="@+id/recycleView_completed_bookings"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -16,16 +17,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/card_ongoing_bookings"
         />
-
-    <ImageView
-        android:id="@+id/emptyBookings"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:src="@drawable/ic_on_notifications"
-        android:contentDescription="@string/todo"
-        />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

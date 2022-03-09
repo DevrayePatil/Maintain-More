@@ -17,8 +17,8 @@ import android.widget.Toast;
 import com.example.maintainmore.Adapters.ImageSlideAdapter;
 import com.example.maintainmore.Adapters.PersonalServicesAdapter;
 import com.example.maintainmore.Adapters.ServicesAdapter;
-import com.example.maintainmore.ServiceBookingActivity;
-import com.example.maintainmore.Models.CardModels;
+import com.example.maintainmore.BookServiceActivity;
+import com.example.maintainmore.Models.ServiceCardModels;
 import com.example.maintainmore.Models.PersonalServicesModel;
 import com.example.maintainmore.R;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
     FirebaseFirestore db;
 
     ArrayList<PersonalServicesModel> personalServicesModels = new ArrayList<>();
-    ArrayList<CardModels> HomeServiceCardModels = new ArrayList<>();
+    ArrayList<ServiceCardModels> homeServiceServiceCardModels = new ArrayList<>();
 
 
 
@@ -65,13 +65,13 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
         Log.i(TAG,"you are in HomeFragment");
 
 
-        ArrayList<CardModels> imageView = new ArrayList<>();
+        ArrayList<ServiceCardModels> imageView = new ArrayList<>();
 
-        imageView.add(new CardModels(R.drawable.image0,""));
-        imageView.add(new CardModels(R.drawable.image1,""));
-        imageView.add(new CardModels(R.drawable.image2,""));
-        imageView.add(new CardModels(R.drawable.image3,""));
-        imageView.add(new CardModels(R.drawable.image4,""));
+        imageView.add(new ServiceCardModels(R.drawable.image0,""));
+        imageView.add(new ServiceCardModels(R.drawable.image1,""));
+        imageView.add(new ServiceCardModels(R.drawable.image2,""));
+        imageView.add(new ServiceCardModels(R.drawable.image3,""));
+        imageView.add(new ServiceCardModels(R.drawable.image4,""));
 
         ImageSlideAdapter slideAdapter = new ImageSlideAdapter(imageView, getContext());
         imageSliderCarousel.setSliderAdapter(slideAdapter);
@@ -107,24 +107,24 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
 
 
 
-        HomeServiceCardModels.add(new CardModels(R.drawable.grapefruit, "Google"));
-        HomeServiceCardModels.add(new CardModels(R.drawable.ic_google, "Google"));
-        HomeServiceCardModels.add(new CardModels(R.drawable.ic_google, "Google is a service"));
+        homeServiceServiceCardModels.add(new ServiceCardModels(R.drawable.ic_google, "Google"));
+        homeServiceServiceCardModels.add(new ServiceCardModels(R.drawable.ic_google, "Google"));
+        homeServiceServiceCardModels.add(new ServiceCardModels(R.drawable.ic_google, "Google is a service"));
 
-        ServicesAdapter homeServicesAdapter = new ServicesAdapter(HomeServiceCardModels, getContext(),this);
+        ServicesAdapter homeServicesAdapter = new ServicesAdapter(homeServiceServiceCardModels, getContext(),this);
         recyclerView_HomeServices.setAdapter(homeServicesAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false );
         recyclerView_HomeServices.setLayoutManager(layoutManager);
 
 
-        ArrayList<CardModels> HomeAppliancesCardModels = new ArrayList<>();
+        ArrayList<ServiceCardModels> homeAppliancesServiceCardModels = new ArrayList<>();
 
-        HomeAppliancesCardModels.add(new CardModels(R.drawable.grapefruit, "Google"));
-        HomeAppliancesCardModels.add(new CardModels(R.drawable.ic_google, "Google"));
-        HomeAppliancesCardModels.add(new CardModels(R.drawable.ic_google, "Google is a service"));
+        homeAppliancesServiceCardModels.add(new ServiceCardModels(R.drawable.ic_google, "Google"));
+        homeAppliancesServiceCardModels.add(new ServiceCardModels(R.drawable.ic_google, "Google"));
+        homeAppliancesServiceCardModels.add(new ServiceCardModels(R.drawable.ic_google, "Google is a service"));
 
-        ServicesAdapter homeAppliancesAdapter= new ServicesAdapter(HomeAppliancesCardModels, getContext(),this);
+        ServicesAdapter homeAppliancesAdapter= new ServicesAdapter(homeAppliancesServiceCardModels, getContext(),this);
         recyclerView_HomeAppliances.setAdapter(homeAppliancesAdapter);
 
         LinearLayoutManager HomeAppliancesLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false );
@@ -138,7 +138,7 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
 
     @Override
     public void onServiceClick(int position) {
-        String name = HomeServiceCardModels.get(position).getName();
+        String name = homeServiceServiceCardModels.get(position).getName();
         Log.i(TAG,"Name: " + name);
 
         Toast.makeText(getContext(),"Item Clicked  " + position + " " + name , Toast.LENGTH_SHORT).show();
@@ -165,7 +165,7 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
         Log.i(TAG,"iconUrl: " + iconUrl);
         Log.i(TAG,"backgroundImageUrl: " + backgroundImageUrl);
 
-        Intent intent = new Intent(getActivity(), ServiceBookingActivity.class);
+        Intent intent = new Intent(getActivity(), BookServiceActivity.class);
 
         intent.putExtra("Name", name);
         intent.putExtra("Description", description);

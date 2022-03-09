@@ -4,16 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.BookingFragment">
+    tools:context=".Fragments.BookingsOngoingFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleView_bookings"
+        android:id="@+id/recycleView_ongoing_bookings"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/card_booking_for_user" />
+        tools:listitem="@layout/card_ongoing_bookings"
+        />
+
+    <ImageView
+        android:id="@+id/emptyBookings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:src="@drawable/ic_on_notifications"
+        android:contentDescription="@string/todo"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

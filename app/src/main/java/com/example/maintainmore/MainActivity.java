@@ -12,7 +12,7 @@ import androidx.core.splashscreen.SplashScreen;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.maintainmore.Fragments.BookingFragment;
+import com.example.maintainmore.Fragments.BookingsFragment;
 import com.example.maintainmore.Fragments.HomeFragment;
 import com.example.maintainmore.Fragments.NotificationsFragment;
 import com.example.maintainmore.Fragments.ProfileFragment;
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG,"Home Clicked");
         }
         else if(item.getItemId() == R.id.booking){
-            setFragment = new BookingFragment();
+            setFragment = new BookingsFragment();
             Log.i(TAG,"Booking Clicked");
         }
         else if(item.getItemId() == R.id.profile){

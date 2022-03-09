@@ -4,7 +4,7 @@
     <string name="login">Login</string>
     <string name="signup">Signup</string>
 
-    <string name="email">Enter your Email</string>
+    <string name="enter_email">Enter your Email</string>
     <string name="password">Enter your Password</string>
 
     <string name="forgot_password">Forgot Password</string>
@@ -51,11 +51,11 @@
     <string name="estimate_time">Estimate Time</string>
     <string name="demo_time">20 min</string>
     <string name="add_item">Add Items</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel_booking">Cancel Booking</string>
     <string name="price_per_item">Price per item</string>
     <string name="demo_price">0 RS</string>
     <string name="default_items">0</string>
-    <string name="total_price">Total Price</string>
+    <string name="total_price">Total Price :</string>
     <string name="total_items">Total Items</string>
 
     <string name="demo_items">0</string>
@@ -67,7 +67,7 @@
     <string name="dummy_email">dummy@mail.com</string>
     <string name="enter_your_name">Enter your Name</string>
     <string name="enter_phone_number">Enter Phone number</string>
-    <string name="dob">Date of borth</string>
+    <string name="dob">Date of birth</string>
     <string name="label_1">Male</string>
     <string name="label_2">Female</string>
     <string name="gender">Gender</string>
@@ -86,9 +86,26 @@
     <string name="pick_date">Pick Date</string>
     <string name="service_for_male">Service For Male</string>
     <string name="service_for_female">Service For Female</string>
-    <string name="total_services">Total Services:</string>
-    <string name="status">Status</string>
-    <string name="update">Update</string>
+    <string name="total_bookings">Total Bookings :</string>
+    <string name="status">Status :</string>
+    <string name="update_booking">Update Booking</string>
+    <string name="book">Book</string>
+    <string name="cancel">Cancel</string>
+    <string name="technician_details">Technician Details</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="number_of_bookings">Number of Bookings :</string>
+    <string name="amount_per_booking">Amount per Booking :</string>
+
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="visiting_date">Visiting Date</string>
+    <string name="visiting_time">Visiting Time</string>
+    <string name="required_time">Required Time</string>
+    <string name="confirm">Confirm</string>
+    <string name="total_amount">Total Amount</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

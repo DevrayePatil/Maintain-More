@@ -7,7 +7,6 @@ import androidx.core.splashscreen.SplashScreen;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,6 +20,7 @@ import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
@@ -106,26 +106,34 @@ public class UpdateBookingActivity extends AppCompatActivity {
     @SuppressLint("LongLogTag")
     private void CancelBooking() {
 
-        db.collection("Bookings").document(bookingID)
-                .addSnapshotListener( (value, error) ->
-                        {
-                            assert value != null;
-                            db.collection("Bookings Cancelled").document(bookingID)
-                                .set(Objects.requireNonNull(value.getData()));
-                            Log.i(TAG, String.valueOf(value.getData()));
-                            finish();
-                        }
-                );
+        db.collection("Bookings").document(bookingID).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    db.collection("Bookings Cancelled").document(bookingID)
+                            .set(Objects.requireNonNull(document.getData()));
+                    Log.d(TAG, "DocumentSnapshot data: " + document.getString("assignedTechnician"));
 
-        new Handler().postDelayed(() -> db.collection("Bookings").document(bookingID).delete().addOnSuccessListener(unused ->
-        Toast.makeText(UpdateBookingActivity.this, "Booking Cancelled", Toast.LENGTH_SHORT).show()
-        ), 2000);
+                    db.collection("Technicians")
+                            .document(Objects.requireNonNull(document.getString("assignedTechnician")))
+                            .update("availabilityStatus","Free").addOnCompleteListener(task1 ->
+                            Log.d(TAG, "update")).addOnFailureListener(e -> Log.d(TAG, "ere: " + e.getMessage()));
 
+                    db.collection("Bookings").document(bookingID).delete().addOnSuccessListener(unused -> {
+                        Log.i(TAG, "BookingCanceled");
+                        finish();
+                    });
+                } else {
+                    Log.d(TAG, "No such document");
+                }
+            } else {
+                Log.d(TAG, "get failed with ", task.getException());
+            }
+        });
     }
 
     private void UpdateBooking() {
         DocumentReference documentReference = db.collection("Bookings").document(bookingID);
-
 
         if (totalServices <= 0){
             Toast.makeText(getApplicationContext(), "Please Select at least 1 Service", Toast.LENGTH_SHORT).show();
@@ -150,7 +158,7 @@ public class UpdateBookingActivity extends AppCompatActivity {
 
 
         documentReference.update(
-                "totalPrice", String.valueOf(totalPrice),
+                "totalServicesPrice", String.valueOf(totalPrice),
                 "totalServices", String.valueOf(totalServices),
                 "servicePrice", String.valueOf(servicePrice),
                 "visitingDate", chosenDate,

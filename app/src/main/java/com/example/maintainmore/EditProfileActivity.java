@@ -130,10 +130,10 @@ public class EditProfileActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
             }
             if (value != null && value.exists()){
-                displayName.setText(value.getString("name"));
+                displayName.setText(value.getString("serviceName"));
                 displayEmail.setText(value.getString("email"));
                 Glide.with(getApplicationContext()).load(value.getString("imageUrl"))
-                        .placeholder(R.drawable.ic_person_png).into(profilePicture);
+                        .placeholder(R.drawable.ic_person).into(profilePicture);
             }
         });
     }
@@ -169,7 +169,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
         db.collection("Users").document(userID).update(
-                "name", FullName,
+                "serviceName", FullName,
                 "gender", checkedName,
                 "phoneNumber", PhoneNumber,
                 "dob", DOB
@@ -211,7 +211,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
             }
             if (value != null && value.exists()){
-                fullName.setText(value.getString("name"));
+                fullName.setText(value.getString("serviceName"));
                 email.setText(value.getString("email"));
                 phoneNumber.setText(value.getString("phoneNumber"));
                 dateOfBirth.setText(value.getString("dob"));

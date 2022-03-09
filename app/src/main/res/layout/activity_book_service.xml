@@ -60,7 +60,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:context=".ServiceBookingActivity">
+                tools:context=".BookServiceActivity">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -131,7 +131,7 @@
                                     android:layout_height="40dp"
                                     android:layout_gravity="end"
                                     android:layout_weight="1"
-                                    android:background="@drawable/background_item_picker"
+                                    android:background="@drawable/bg_item_picker"
                                     android:padding="@dimen/normal_half_margin"
                                     android:text="@string/demo_time">
 
@@ -209,7 +209,7 @@
                                     android:layout_height="40dp"
                                     android:layout_gravity="end"
                                     android:layout_weight="1"
-                                    android:background="@drawable/background_item_picker"
+                                    android:background="@drawable/bg_item_picker"
                                     android:padding="@dimen/normal_half_margin"
                                     android:text="@string/demo_time">
 
@@ -396,6 +396,7 @@
                                     android:gravity="end"
                                     android:text="@string/choose_time"
                                     android:textSize="18sp"
+                                    tools:ignore="TextContrastCheck"
                                     tools:text="@string/dummy_date" />
 
                             </LinearLayout>
@@ -519,7 +520,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
-                    android:text="@string/booking"
+                    android:text="@string/book"
                     android:textAllCaps="false"
                     tools:ignore="ButtonStyle,TextContrastCheck" />
 

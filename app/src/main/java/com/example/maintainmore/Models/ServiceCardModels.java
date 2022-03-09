@@ -1,11 +1,11 @@
 package com.example.maintainmore.Models;
 
-public class CardModels {
+public class ServiceCardModels {
 
     int picture;
     String name;
 
-    public CardModels(int picture, String name) {
+    public ServiceCardModels(int picture, String name) {
         this.picture = picture;
         this.name = name;
     }
