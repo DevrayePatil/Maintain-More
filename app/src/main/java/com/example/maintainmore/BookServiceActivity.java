@@ -54,6 +54,7 @@ public class BookServiceActivity extends AppCompatActivity {
     Button buttonChooseDate, buttonChooseTime;
 
     TextView displayServiceName, displayServiceDescription, displayTotalItems, displayTotalPrice;
+    TextView displayWalletBalance;
     TextView displayRequiredTime, displayServicePrice;
     TextView displayServiceDate, displayServiceTime;
     ImageView imageBackground;
@@ -63,6 +64,7 @@ public class BookServiceActivity extends AppCompatActivity {
     int totalServices = 0;
     int servicePrice = 0;
     int totalServicesPrice = 0;
+    int totalWalletBalance = 0;
 
     boolean availableTechnician = false;
 
@@ -92,6 +94,8 @@ public class BookServiceActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        GetDataFromDataBase();
 
         LinkedViewIDes();
         GetDataFromCard();
@@ -184,10 +188,12 @@ public class BookServiceActivity extends AppCompatActivity {
                 intent.putExtra("visitingDate", chosenDate);
                 intent.putExtra("visitingTime",chosenTime);
                 intent.putExtra("cancelTillHour", cancellationTime);
+                intent.putExtra("totalWalletBalance", String.valueOf(totalWalletBalance));
 
                 intent.putExtra("bookingStatus","booked");
 
-                Log.d(TAG,"Services" + totalServices);
+                Log.d(TAG,"Services" + totalWalletBalance);
+
 
                 if (numberOfServicesForMale != 0){
                     intent.putExtra("servicesForMale", String.valueOf(numberOfServicesForMale));
@@ -352,6 +358,28 @@ public class BookServiceActivity extends AppCompatActivity {
         displayServiceDescription.setText(serviceDescription);
         displayRequiredTime.setText(requiredTime);
         displayServicePrice.setText(price);
+
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void GetDataFromDataBase() {
+        db.collection("Users").document(userID)
+                .get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+
+                    totalWalletBalance = Integer.parseInt(Objects.requireNonNull(document.getString("walletBalanceInINR")));
+                    displayWalletBalance.setText("₹ " + totalWalletBalance);
+
+                } else {
+                    Log.d(TAG, "No such document");
+                }
+            } else {
+                Log.d(TAG, "get failed with ", task.getException());
+            }
+        });
     }
 
     @SuppressLint("LongLogTag")
@@ -400,6 +428,7 @@ public class BookServiceActivity extends AppCompatActivity {
 
         displayTotalItems = findViewById(R.id.displayTotalItems);
         displayTotalPrice = findViewById(R.id.displayTotalPrice);
+        displayWalletBalance = findViewById(R.id.displayWalletBalance);
     }
 
 }

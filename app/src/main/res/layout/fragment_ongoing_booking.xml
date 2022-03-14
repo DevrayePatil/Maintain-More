@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible"
-        android:src="@drawable/ic_on_notifications"
+        android:src="@drawable/ic_no_notifications"
         android:contentDescription="@string/todo"
         />
 

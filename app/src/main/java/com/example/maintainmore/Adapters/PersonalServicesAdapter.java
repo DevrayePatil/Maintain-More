@@ -11,19 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.maintainmore.Models.PersonalServicesModel;
+import com.example.maintainmore.Modals.PersonalServicesModal;
 import com.example.maintainmore.R;
 
 import java.util.ArrayList;
 
 public class PersonalServicesAdapter extends RecyclerView.Adapter<PersonalServicesAdapter.viewHolder>{
 
-    ArrayList<PersonalServicesModel> servicesModel;
+    ArrayList<PersonalServicesModal> servicesModel;
     Context context;
 
     viewHolder.OnPersonalServiceClickListener personalServiceClickListener;
 
-    public PersonalServicesAdapter(ArrayList<PersonalServicesModel> servicesModel, Context context,
+    public PersonalServicesAdapter(ArrayList<PersonalServicesModal> servicesModel, Context context,
                                    viewHolder.OnPersonalServiceClickListener personalServiceClickListener) {
         this.servicesModel = servicesModel;
         this.context = context;
@@ -40,7 +40,7 @@ public class PersonalServicesAdapter extends RecyclerView.Adapter<PersonalServic
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-        PersonalServicesModel model = servicesModel.get(position);
+        PersonalServicesModal model = servicesModel.get(position);
         holder.textView.setText(model.getName());
 
         Glide.with(context).load(model.getIconUrl()).placeholder(R.drawable.ic_account).into(holder.imageView);

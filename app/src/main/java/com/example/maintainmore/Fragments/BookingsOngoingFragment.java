@@ -12,10 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.maintainmore.Adapters.ServiceBookingAdapter;
-import com.example.maintainmore.Models.ServiceBookingModels;
+import com.example.maintainmore.Modals.ServiceBookingModal;
 import com.example.maintainmore.R;
 import com.example.maintainmore.UpdateBookingActivity;
 
@@ -48,7 +47,7 @@ public class BookingsOngoingFragment extends Fragment
     RecyclerView recyclerView_ongoing_bookings;
     ImageView emptyBookings;
 
-    ArrayList<ServiceBookingModels> bookingModels = new ArrayList<>();
+    ArrayList<ServiceBookingModal> bookingModels = new ArrayList<>();
 
 
     @Override
@@ -75,7 +74,7 @@ public class BookingsOngoingFragment extends Fragment
 
                 if (Objects.equals(snapshot.getString("bookingStatus"), "Booked")) {
 
-                    bookingModels.add(new ServiceBookingModels(snapshot.getId(),
+                    bookingModels.add(new ServiceBookingModal(snapshot.getId(),
                         snapshot.getString("whoBookedService"),snapshot.getString("assignedTechnician"),
                         snapshot.getString("serviceName"), snapshot.getString("serviceDescription"),
                         snapshot.getString("serviceType"), snapshot.getString("serviceIcon"),

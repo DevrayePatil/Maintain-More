@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.maintainmore.Models.ServiceCardModels;
+import com.example.maintainmore.Modals.ServiceCardModal;
 import com.example.maintainmore.R;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
@@ -15,10 +15,10 @@ import java.util.ArrayList;
 
 public class ImageSlideAdapter extends SliderViewAdapter<ImageSlideAdapter.viewHolder>{
 
-    ArrayList<ServiceCardModels> serviceCardModels;
+    ArrayList<ServiceCardModal> serviceCardModels;
     Context context;
 
-    public ImageSlideAdapter(ArrayList<ServiceCardModels> serviceCardModels, Context context) {
+    public ImageSlideAdapter(ArrayList<ServiceCardModal> serviceCardModels, Context context) {
         this.serviceCardModels = serviceCardModels;
         this.context = context;
     }
@@ -31,7 +31,7 @@ public class ImageSlideAdapter extends SliderViewAdapter<ImageSlideAdapter.viewH
 
     @Override
     public void onBindViewHolder(viewHolder viewHolder, int position) {
-        ServiceCardModels models = serviceCardModels.get(position);
+        ServiceCardModal models = serviceCardModels.get(position);
         viewHolder.imageView.setImageResource(models.getPicture());
     }
 

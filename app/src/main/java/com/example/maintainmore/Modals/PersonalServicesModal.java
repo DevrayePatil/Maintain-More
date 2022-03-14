@@ -1,10 +1,10 @@
-package com.example.maintainmore.Models;
+package com.example.maintainmore.Modals;
 
-public class PersonalServicesModel {
+public class PersonalServicesModal {
     String serviceType, name, description,timeRequired, price, iconUrl, backgroundImageUrl;
 
 
-    public PersonalServicesModel(String serviceType, String name, String description,
+    public PersonalServicesModal(String serviceType, String name, String description,
                                  String timeRequired, String price, String iconUrl,
                                  String backgroundImageUrl) {
         this.serviceType = serviceType;

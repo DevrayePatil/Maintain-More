@@ -1,4 +1,4 @@
-package com.example.maintainmore.Models;
+package com.example.maintainmore.Modals;
 
 public class ServiceCanceledModal {
 

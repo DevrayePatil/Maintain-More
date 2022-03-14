@@ -37,6 +37,7 @@ public class BookingPaymentActivity extends AppCompatActivity {
     TextView displayTechnicianName, displayTechnicianEmail,displayTechnicianPhoneNumber;
     TextView displayVisitingDate, displayVisitingTime,displayRequiredTime;
     TextView displayNumberOfBookings, displayAmountPerBooking, displayTotalAmount;
+    TextView displayWalletBalance;
     
     Button buttonCancel, buttonBook;
 
@@ -46,6 +47,7 @@ public class BookingPaymentActivity extends AppCompatActivity {
     int servicePrice = 0;
     int totalServices = 0;
     int totalServicesPrice = 0;
+    int totalWalletBalance = 0;
 
     String serviceName, serviceDescription, serviceType, requiredTime;
     String bookingDate, bookingTime, visitingDate, visitingTime, cancellationTimeTill, bookingStatus;
@@ -76,6 +78,8 @@ public class BookingPaymentActivity extends AppCompatActivity {
         displayNumberOfBookings = findViewById(R.id.displayNumberOfBookings);
         displayAmountPerBooking = findViewById(R.id.displayAmountPerBooking);
         displayTotalAmount = findViewById(R.id.displayTotalAmount);
+
+        displayWalletBalance = findViewById(R.id.displayWalletBalance);
 
 
 
@@ -153,6 +157,7 @@ public class BookingPaymentActivity extends AppCompatActivity {
         String strTotalServices = intent.getStringExtra("totalServices");
         String strServicePrice = intent.getStringExtra("servicePrice");
         String strTotalServicePrice= intent.getStringExtra("totalServicesPrice");
+        String strTotalWalletBalance= intent.getStringExtra("totalWalletBalance");
 
         Log.i(TAG,"ServiceType: " + serviceType);
         Log.i(TAG,"Total Services: " + strTotalServices);
@@ -167,6 +172,9 @@ public class BookingPaymentActivity extends AppCompatActivity {
         totalServices = Integer.parseInt(strTotalServices);
         servicePrice = Integer.parseInt(strServicePrice);
         totalServicesPrice = Integer.parseInt(strTotalServicePrice);
+        totalWalletBalance = Integer.parseInt(strTotalWalletBalance);
+
+
 
     }
 
@@ -191,6 +199,8 @@ public class BookingPaymentActivity extends AppCompatActivity {
                 displayNumberOfBookings.setText(String.valueOf(totalServices));
                 displayAmountPerBooking.setText(String.valueOf(servicePrice));
                 displayTotalAmount.setText(String.valueOf(totalServicesPrice));
+
+                displayWalletBalance.setText(String.valueOf(totalWalletBalance));
             }
         });
     }

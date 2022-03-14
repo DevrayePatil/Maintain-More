@@ -11,19 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.maintainmore.Models.ServiceBookingModels;
+import com.example.maintainmore.Modals.ServiceBookingModal;
 import com.example.maintainmore.R;
 
 import java.util.ArrayList;
 
 public class ServiceBookingAdapter extends RecyclerView.Adapter<ServiceBookingAdapter.viewHolder>{
 
-    ArrayList<ServiceBookingModels> bookingModels;
+    ArrayList<ServiceBookingModal> bookingModels;
     Context context;
 
     viewHolder.OnServiceBookingCardClickListener bookingCardClickListener;
 
-    public ServiceBookingAdapter(ArrayList<ServiceBookingModels> bookingModels,
+    public ServiceBookingAdapter(ArrayList<ServiceBookingModal> bookingModels,
                                  Context context,
                                  viewHolder.OnServiceBookingCardClickListener bookingCardClickListener) {
         this.bookingModels = bookingModels;
@@ -43,7 +43,7 @@ public class ServiceBookingAdapter extends RecyclerView.Adapter<ServiceBookingAd
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
 
-        ServiceBookingModels models = bookingModels.get(position);
+        ServiceBookingModal models = bookingModels.get(position);
 
         holder.displayServiceName.setText(models.getServiceName());
         holder.displayServiceDescription.setText(models.getServiceDescription());

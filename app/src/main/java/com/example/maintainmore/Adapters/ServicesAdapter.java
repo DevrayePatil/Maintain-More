@@ -10,19 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.maintainmore.Models.ServiceCardModels;
+import com.example.maintainmore.Modals.ServiceCardModal;
 import com.example.maintainmore.R;
 
 import java.util.ArrayList;
 
 public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.viewHolder> {
 
-    ArrayList<ServiceCardModels> serviceCardModels;
+    ArrayList<ServiceCardModal> serviceCardModels;
     Context context;
 
     viewHolder.OnServiceClickListener onServiceClickListener;
 
-    public ServicesAdapter(ArrayList<ServiceCardModels> serviceCardModels, Context context, viewHolder.OnServiceClickListener onServiceClickListener) {
+    public ServicesAdapter(ArrayList<ServiceCardModal> serviceCardModels, Context context, viewHolder.OnServiceClickListener onServiceClickListener) {
         this.serviceCardModels = serviceCardModels;
         this.context = context;
 
@@ -41,7 +41,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.viewHo
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
 
-        ServiceCardModels models = serviceCardModels.get(position);
+        ServiceCardModal models = serviceCardModels.get(position);
 
         holder.imageView.setImageResource(models.getPicture());
         holder.textView.setText(models.getName());

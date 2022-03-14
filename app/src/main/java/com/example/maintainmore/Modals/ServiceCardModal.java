@@ -1,11 +1,11 @@
-package com.example.maintainmore.Models;
+package com.example.maintainmore.Modals;
 
-public class ServiceCardModels {
+public class ServiceCardModal {
 
     int picture;
     String name;
 
-    public ServiceCardModels(int picture, String name) {
+    public ServiceCardModal(int picture, String name) {
         this.picture = picture;
         this.name = name;
     }

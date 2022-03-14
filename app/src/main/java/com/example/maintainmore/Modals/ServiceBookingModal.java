@@ -1,6 +1,6 @@
-package com.example.maintainmore.Models;
+package com.example.maintainmore.Modals;
 
-public class ServiceBookingModels {
+public class ServiceBookingModal {
     String bookingID, userID, assignedTechnician,
             serviceName, serviceDescription,
             serviceType, serviceIconUrl, visitingDate, visitingTime,
@@ -8,7 +8,7 @@ public class ServiceBookingModels {
             servicesForMale, servicesForFemale, totalServices, totalServicesPrice,
             cancellationTill, serviceStatus;
 
-    public ServiceBookingModels(
+    public ServiceBookingModal(
             String bookingID, String userID, String assignedTechnician,
             String serviceName, String serviceDescription,
             String serviceType, String serviceIconUrl, String visitingDate,String visitingTime,

@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.maintainmore.Adapters.ServiceBookingAdapter;
-import com.example.maintainmore.Models.ServiceBookingModels;
+import com.example.maintainmore.Modals.ServiceBookingModal;
 import com.example.maintainmore.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,7 +38,7 @@ public class BookingsCompletedFragment extends Fragment
     }
 
     RecyclerView recyclerView_completed_bookings;
-    ArrayList<ServiceBookingModels> bookingModels = new ArrayList<>();
+    ArrayList<ServiceBookingModal> bookingModels = new ArrayList<>();
 
 
     @Override
@@ -64,7 +64,7 @@ public class BookingsCompletedFragment extends Fragment
 
                 if (Objects.equals(snapshot.getString("bookingStatus"), "Completed")) {
 
-                    bookingModels.add(new ServiceBookingModels(snapshot.getId(),
+                    bookingModels.add(new ServiceBookingModal(snapshot.getId(),
                             snapshot.getString("whoBookedService"),snapshot.getString("assignedTechnician"),
                             snapshot.getString("serviceName"), snapshot.getString("serviceDescription"),
                             snapshot.getString("serviceType"), snapshot.getString("serviceIcon"),

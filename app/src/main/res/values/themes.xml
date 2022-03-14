@@ -32,15 +32,19 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
     <style name="Theme.OutlineButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="strokeColor">@color/color_primary</item>
         <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
+    </style>
 
+    <style name="Theme.OutlineButtonStyle.WalletAddMoney" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/gray_btn_bg_color</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
     </style>
 
     <style name="Theme.BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="colorPrimary">@color/white</item>
-
     </style>
 
 

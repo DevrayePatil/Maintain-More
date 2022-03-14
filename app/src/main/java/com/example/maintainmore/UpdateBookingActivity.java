@@ -114,6 +114,10 @@ public class UpdateBookingActivity extends AppCompatActivity {
                             .set(Objects.requireNonNull(document.getData()));
                     Log.d(TAG, "DocumentSnapshot data: " + document.getString("assignedTechnician"));
 
+                    db.collection("Bookings Cancelled").document(bookingID)
+                            .update("bookingStatus", "Cancelled").addOnCompleteListener(task1 ->
+                            Log.d(TAG,"Cancel updated" ));
+
                     db.collection("Technicians")
                             .document(Objects.requireNonNull(document.getString("assignedTechnician")))
                             .update("availabilityStatus","Free").addOnCompleteListener(task1 ->
@@ -154,8 +158,6 @@ public class UpdateBookingActivity extends AppCompatActivity {
         if (numberOfServicesForFemale != 0){
             documentReference.update("servicesForFemale", String.valueOf(numberOfServicesForFemale));
         }
-
-
 
         documentReference.update(
                 "totalServicesPrice", String.valueOf(totalPrice),

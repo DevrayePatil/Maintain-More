@@ -6,6 +6,9 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="@dimen/normal_margin"
+    android:padding="@dimen/normal_half_margin"
+    app:cardCornerRadius="@dimen/normal_half_margin"
+    app:cardElevation="10dp"
     >
 
     <LinearLayout
@@ -53,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     tools:ignore="TextContrastCheck"
-                    tools:text="Personal Service" />
+                    tools:text="Service Type" />
 
                 <TextView
                     android:id="@+id/displayServiceName"
@@ -63,7 +66,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageViewIcon"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Personal Service" />
+                    tools:text="Service Name" />
 
                 <TextView
                     android:id="@+id/displayServiceDescription"
@@ -74,7 +77,8 @@
                     app:layout_constraintStart_toEndOf="@+id/imageViewIcon"
                     app:layout_constraintTop_toBottomOf="@+id/displayServiceName"
                     tools:ignore="TextContrastCheck"
-                    tools:text="Personal Service" />
+                    tools:text="Service Description" />
+
             </LinearLayout>
 
 
@@ -84,40 +88,115 @@
             android:id="@+id/cardBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/cardHeader"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/cardHeader"
-                android:orientation="vertical"
-                >
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:baselineAligned="false">
 
-
-                <TextView
-                    android:id="@+id/displayTechnicianName"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/booking_card_text_size"
-                    tools:ignore="TextContrastCheck"
-                    tools:text="user name" />
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
 
-                <TextView
-                    android:id="@+id/displayTechnicianEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/booking_card_text_size"
-                    tools:ignore="TextContrastCheck"
-                    tools:text="user@mail.com" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/booking_date"
+                        tools:ignore="TextContrastCheck"
+                        />
 
-                <TextView
-                    android:id="@+id/displayTechnicianPhoneNumber"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/displayBookingDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:ignore="TextContrastCheck"
+                        tools:text="12 jan 2022"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/booking_card_text_size"
-                    tools:ignore="TextContrastCheck"
-                    tools:text="+91 7038754574" />
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/booking_time"
+                        tools:ignore="TextContrastCheck" />
+
+                    <TextView
+                        android:id="@+id/displayBookingTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:ignore="TextContrastCheck"
+                        tools:text="10:32 am" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:baselineAligned="false">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:weightSum="3"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/visiting_date"
+                        tools:ignore="TextContrastCheck" />
+
+                    <TextView
+                        android:id="@+id/displayVisitingDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:ignore="TextContrastCheck"
+                        tools:text="12 jan 2022" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/visiting_time"
+                        tools:ignore="TextContrastCheck" />
+
+                    <TextView
+                        android:id="@+id/displayVisitingTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:ignore="TextContrastCheck"
+                        tools:text="10:32 am" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -127,7 +206,7 @@
                 android:layout_height="wrap_content"
                 android:weightSum="2"
                 android:orientation="horizontal"
-                tools:ignore="DisableBaselineAlignment">
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:id="@+id/totalServiceLayout"
@@ -139,7 +218,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/normal_margin"
                         android:text="@string/total_bookings"
                         android:textSize="@dimen/booking_card_text_size"
                         tools:ignore="TextContrastCheck" />
@@ -149,8 +227,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/booking_card_text_size"
-                        app:layout_constraintStart_toEndOf="@+id/totalServices"
-                        app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="TextContrastCheck"
                         tools:text="5" />
 

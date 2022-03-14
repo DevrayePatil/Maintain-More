@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.maintainmore.Adapters.ServiceCanceledAdapter;
-import com.example.maintainmore.Models.ServiceCanceledModal;
+import com.example.maintainmore.Modals.ServiceCanceledModal;
 import com.example.maintainmore.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -59,7 +59,7 @@ public class BookingsCanceledFragment extends Fragment {
             assert value != null;
             for (DocumentSnapshot snapshot: value){
 
-                if (Objects.equals(snapshot.getString("bookingStatus"), "Booked")) {
+                if (Objects.equals(snapshot.getString("bookingStatus"), "Cancelled")) {
 
                     canceledModals.add(new ServiceCanceledModal(snapshot.getId(),
                             snapshot.getString("whoBookedService"),snapshot.getString("assignedTechnician"),

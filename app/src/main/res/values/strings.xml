@@ -106,6 +106,11 @@
     <string name="total_amount">Total Amount</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="wallet_balance">Wallet Balance</string>
+    <string name="booking_date">Booking Date:</string>
+    <string name="booking_time">Booking Time:</string>
+    <string name="current_balance">Current Balance</string>
+    <string name="transactions">Transactions</string>
 
 
 </resources>

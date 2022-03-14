@@ -18,8 +18,8 @@ import com.example.maintainmore.Adapters.ImageSlideAdapter;
 import com.example.maintainmore.Adapters.PersonalServicesAdapter;
 import com.example.maintainmore.Adapters.ServicesAdapter;
 import com.example.maintainmore.BookServiceActivity;
-import com.example.maintainmore.Models.ServiceCardModels;
-import com.example.maintainmore.Models.PersonalServicesModel;
+import com.example.maintainmore.Modals.ServiceCardModal;
+import com.example.maintainmore.Modals.PersonalServicesModal;
 import com.example.maintainmore.R;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -45,8 +45,8 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
 
     FirebaseFirestore db;
 
-    ArrayList<PersonalServicesModel> personalServicesModels = new ArrayList<>();
-    ArrayList<ServiceCardModels> homeServiceServiceCardModels = new ArrayList<>();
+    ArrayList<PersonalServicesModal> personalServicesModals = new ArrayList<>();
+    ArrayList<ServiceCardModal> homeServiceServiceCardModels = new ArrayList<>();
 
 
 
@@ -65,13 +65,13 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
         Log.i(TAG,"you are in HomeFragment");
 
 
-        ArrayList<ServiceCardModels> imageView = new ArrayList<>();
+        ArrayList<ServiceCardModal> imageView = new ArrayList<>();
 
-        imageView.add(new ServiceCardModels(R.drawable.image0,""));
-        imageView.add(new ServiceCardModels(R.drawable.image1,""));
-        imageView.add(new ServiceCardModels(R.drawable.image2,""));
-        imageView.add(new ServiceCardModels(R.drawable.image3,""));
-        imageView.add(new ServiceCardModels(R.drawable.image4,""));
+        imageView.add(new ServiceCardModal(R.drawable.image0,""));
+        imageView.add(new ServiceCardModal(R.drawable.image1,""));
+        imageView.add(new ServiceCardModal(R.drawable.image2,""));
+        imageView.add(new ServiceCardModal(R.drawable.image3,""));
+        imageView.add(new ServiceCardModal(R.drawable.image4,""));
 
         ImageSlideAdapter slideAdapter = new ImageSlideAdapter(imageView, getContext());
         imageSliderCarousel.setSliderAdapter(slideAdapter);
@@ -86,10 +86,10 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
         db = FirebaseFirestore.getInstance();
 
         db.collection("Personal Services").addSnapshotListener((value, error) -> {
-            personalServicesModels.clear();
+            personalServicesModals.clear();
             assert value != null;
             for (DocumentSnapshot snapshot: value){
-                personalServicesModels.add(new PersonalServicesModel(
+                personalServicesModals.add(new PersonalServicesModal(
                         snapshot.getString("serviceType"), snapshot.getString("serviceName"),
                         snapshot.getString("serviceDescription"),snapshot.getString("requiredTime"),
                         snapshot.getString("servicePrice"), snapshot.getString("iconUrl"),
@@ -97,7 +97,7 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
                         )
                 );
             }
-            PersonalServicesAdapter servicesAdapter = new PersonalServicesAdapter(personalServicesModels, getContext(),this);
+            PersonalServicesAdapter servicesAdapter = new PersonalServicesAdapter(personalServicesModals, getContext(),this);
             recyclerView_PersonalServices.setAdapter(servicesAdapter);
 
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false );
@@ -107,9 +107,9 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
 
 
 
-        homeServiceServiceCardModels.add(new ServiceCardModels(R.drawable.ic_google, "Google"));
-        homeServiceServiceCardModels.add(new ServiceCardModels(R.drawable.ic_google, "Google"));
-        homeServiceServiceCardModels.add(new ServiceCardModels(R.drawable.ic_google, "Google is a service"));
+        homeServiceServiceCardModels.add(new ServiceCardModal(R.drawable.ic_google, "Google"));
+        homeServiceServiceCardModels.add(new ServiceCardModal(R.drawable.ic_google, "Google"));
+        homeServiceServiceCardModels.add(new ServiceCardModal(R.drawable.ic_google, "Google is a service"));
 
         ServicesAdapter homeServicesAdapter = new ServicesAdapter(homeServiceServiceCardModels, getContext(),this);
         recyclerView_HomeServices.setAdapter(homeServicesAdapter);
@@ -118,11 +118,11 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
         recyclerView_HomeServices.setLayoutManager(layoutManager);
 
 
-        ArrayList<ServiceCardModels> homeAppliancesServiceCardModels = new ArrayList<>();
+        ArrayList<ServiceCardModal> homeAppliancesServiceCardModels = new ArrayList<>();
 
-        homeAppliancesServiceCardModels.add(new ServiceCardModels(R.drawable.ic_google, "Google"));
-        homeAppliancesServiceCardModels.add(new ServiceCardModels(R.drawable.ic_google, "Google"));
-        homeAppliancesServiceCardModels.add(new ServiceCardModels(R.drawable.ic_google, "Google is a service"));
+        homeAppliancesServiceCardModels.add(new ServiceCardModal(R.drawable.ic_google, "Google"));
+        homeAppliancesServiceCardModels.add(new ServiceCardModal(R.drawable.ic_google, "Google"));
+        homeAppliancesServiceCardModels.add(new ServiceCardModal(R.drawable.ic_google, "Google is a service"));
 
         ServicesAdapter homeAppliancesAdapter= new ServicesAdapter(homeAppliancesServiceCardModels, getContext(),this);
         recyclerView_HomeAppliances.setAdapter(homeAppliancesAdapter);
@@ -146,14 +146,14 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
 
     @Override
     public void onPersonalServiceClick(int position) {
-         String name = personalServicesModels.get(position).getName();
-         String description = personalServicesModels.get(position).getDescription();
-         String serviceType = personalServicesModels.get(position).getServiceType();
-         String requiredTime = personalServicesModels.get(position).getTimeRequired();
-         String price = personalServicesModels.get(position).getPrice();
+         String name = personalServicesModals.get(position).getName();
+         String description = personalServicesModals.get(position).getDescription();
+         String serviceType = personalServicesModals.get(position).getServiceType();
+         String requiredTime = personalServicesModals.get(position).getTimeRequired();
+         String price = personalServicesModals.get(position).getPrice();
 
-         String iconUrl = personalServicesModels.get(position).getIconUrl();
-         String backgroundImageUrl = personalServicesModels.get(position).getBackgroundImageUrl();
+         String iconUrl = personalServicesModals.get(position).getIconUrl();
+         String backgroundImageUrl = personalServicesModals.get(position).getBackgroundImageUrl();
 
 
         Log.i(TAG,"Name: " + name);
