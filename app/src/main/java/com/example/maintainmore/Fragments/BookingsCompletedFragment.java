@@ -1,5 +1,6 @@
 package com.example.maintainmore.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,9 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.maintainmore.Adapters.ServiceBookingAdapter;
+import com.example.maintainmore.Adapters.ServiceCompletedAdapter;
 import com.example.maintainmore.Modals.ServiceBookingModal;
 import com.example.maintainmore.R;
+import com.example.maintainmore.ServiceCompletedActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -23,7 +25,7 @@ import java.util.Objects;
 
 
 public class BookingsCompletedFragment extends Fragment
-        implements ServiceBookingAdapter.viewHolder.OnServiceBookingCardClickListener {
+        implements ServiceCompletedAdapter.ViewHolder.OnServiceCompletedCardClickListener {
 
 //    private static final String TAG = "BookingsCompletedFragmentInfo";
 
@@ -77,8 +79,8 @@ public class BookingsCompletedFragment extends Fragment
                     ));
                 }
             }
-            ServiceBookingAdapter bookingAdapter = new ServiceBookingAdapter(bookingModels,getContext(), this);
-            recyclerView_completed_bookings.setAdapter(bookingAdapter);
+            ServiceCompletedAdapter serviceCompletedAdapter = new ServiceCompletedAdapter(bookingModels,getContext(), this);
+            recyclerView_completed_bookings.setAdapter(serviceCompletedAdapter);
         });
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -88,8 +90,19 @@ public class BookingsCompletedFragment extends Fragment
         return view;
     }
 
+
     @Override
-    public void onBookingCardClick(int position) {
+    public void onServiceCompletedListener(int position) {
+
+        String bookingID = bookingModels.get(position).getBookingID();
+        String assignedTechnician = bookingModels.get(position).getAssignedTechnician();
+
+        Intent intent = new Intent(requireActivity(), ServiceCompletedActivity.class);
+
+        intent.putExtra("bookingID", bookingID);
+        intent.putExtra("assignedTechnician", assignedTechnician);
+
+        startActivity(intent);
 
     }
 }

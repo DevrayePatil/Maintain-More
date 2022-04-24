@@ -47,7 +47,6 @@
                 android:text="@string/login"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:textColor="?attr/textFillColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -144,7 +143,6 @@
             android:layout_height="wrap_content"
             android:text="@string/noAccount"
             android:textSize="14sp"
-            android:textColor="?attr/textFillColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

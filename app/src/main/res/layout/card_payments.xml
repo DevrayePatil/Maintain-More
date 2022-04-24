@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="5dp"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="@dimen/normal_half_margin"
+    android:layout_margin="@dimen/normal_half_margin">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:layout_margin="@dimen/normal_half_margin"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="3"
+            >
+
+            <TextView
+                android:id="@+id/displayPaymentID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                tools:text="TransactionID"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                    android:id="@+id/displayBookingID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="bookingID"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/amount_paid"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/normal_half_margin"
+                android:layout_marginBottom="@dimen/normal_half_margin"
+                android:layout_weight="1"
+                />
+
+                <TextView
+                    android:id="@+id/displayPaidAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textAlignment="textEnd"
+                    android:layout_marginTop="@dimen/normal_half_margin"
+                    android:layout_marginBottom="@dimen/normal_half_margin"
+                    android:textStyle="bold"
+                    tools:text="₹ 120"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/payment_date"
+                android:layout_weight="1"
+                />
+
+                <TextView
+                    android:id="@+id/displayPaymentDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/payment_time"
+                android:layout_weight="1"
+                />
+
+                <TextView
+                    android:id="@+id/displayPaymentTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            >
+
+            <TextView
+                android:id="@+id/displayPaymentStatus"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/normal_margin"
+                android:gravity="center"
+                android:textColor="@color/color_green"
+                android:textSize="22sp"
+                tools:text="Cr" />
+        </LinearLayout>
+
+        </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

@@ -29,6 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 
 import java.text.DateFormat;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -120,18 +121,18 @@ public class BookServiceActivity extends AppCompatActivity {
     public void BookService() {
 
 
-//        if (totalServices <= 0){
-//            Toast.makeText(getApplicationContext(), "Please Select at least 1 Service", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        if (chosenDate.equals("")){
-//            Toast.makeText(getApplicationContext(), "Please Choose service Date", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        if (chosenTime.equals("")){
-//            Toast.makeText(getApplicationContext(), "Please Choose service Time", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
+        if (totalServices <= 0){
+            Toast.makeText(getApplicationContext(), "Please Select at least 1 Service", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (chosenDate.equals("")){
+            Toast.makeText(getApplicationContext(), "Please Choose service Date", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (chosenTime.equals("")){
+            Toast.makeText(getApplicationContext(), "Please Choose service Time", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         db.collection("Technicians").addSnapshotListener((value, error) -> {
 
@@ -195,14 +196,18 @@ public class BookServiceActivity extends AppCompatActivity {
                 Log.d(TAG,"Services" + totalWalletBalance);
 
 
-                if (numberOfServicesForMale != 0){
+
                     intent.putExtra("servicesForMale", String.valueOf(numberOfServicesForMale));
-                }
-                if (numberOfServicesForFemale != 0){
+
                     intent.putExtra("servicesForFemale", String.valueOf(numberOfServicesForFemale));
-                }
+
+
+
+                Log.i(TAG, "servicesForMale" + numberOfServicesForMale);
 
                 startActivity(intent);
+
+
             }
 
         },100);
@@ -357,12 +362,11 @@ public class BookServiceActivity extends AppCompatActivity {
         displayServiceName.setText(serviceName);
         displayServiceDescription.setText(serviceDescription);
         displayRequiredTime.setText(requiredTime);
-        displayServicePrice.setText(price);
+        displayServicePrice.setText(String.format("₹ %s", price));
 
 
     }
 
-    @SuppressLint("SetTextI18n")
     private void GetDataFromDataBase() {
         db.collection("Users").document(userID)
                 .get().addOnCompleteListener(task -> {
@@ -371,7 +375,8 @@ public class BookServiceActivity extends AppCompatActivity {
                 if (document.exists()) {
 
                     totalWalletBalance = Integer.parseInt(Objects.requireNonNull(document.getString("walletBalanceInINR")));
-                    displayWalletBalance.setText("₹ " + totalWalletBalance);
+
+                    displayWalletBalance.setText(MessageFormat.format("₹ {0}", totalWalletBalance));
 
                 } else {
                     Log.d(TAG, "No such document");

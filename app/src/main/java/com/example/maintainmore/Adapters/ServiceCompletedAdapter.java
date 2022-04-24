@@ -16,34 +16,32 @@ import com.example.maintainmore.R;
 
 import java.util.ArrayList;
 
-public class ServiceBookingAdapter extends RecyclerView.Adapter<ServiceBookingAdapter.viewHolder>{
+public class ServiceCompletedAdapter extends RecyclerView.Adapter<ServiceCompletedAdapter.ViewHolder>{
 
-    ArrayList<ServiceBookingModal> bookingModels;
+    ArrayList<ServiceBookingModal> serviceBookingModals;
     Context context;
 
-    viewHolder.OnServiceBookingCardClickListener bookingCardClickListener;
+    ViewHolder.OnServiceCompletedCardClickListener clickListener;
 
-    public ServiceBookingAdapter(ArrayList<ServiceBookingModal> bookingModels,
-                                 Context context,
-                                 viewHolder.OnServiceBookingCardClickListener bookingCardClickListener) {
-        this.bookingModels = bookingModels;
+    public ServiceCompletedAdapter(ArrayList<ServiceBookingModal> serviceBookingModals, Context context,
+                                   ViewHolder.OnServiceCompletedCardClickListener clickListener) {
+        this.serviceBookingModals = serviceBookingModals;
         this.context = context;
-        this.bookingCardClickListener = bookingCardClickListener;
+        this.clickListener = clickListener;
     }
 
     @NonNull
     @Override
-    public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.card_ongoing_bookings, parent, false);
 
-        return new viewHolder(view, bookingCardClickListener);
+        return new ServiceCompletedAdapter.ViewHolder(view, clickListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull viewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        ServiceBookingModal models = bookingModels.get(position);
+        ServiceBookingModal models = serviceBookingModals.get(position);
 
         holder.displayServiceName.setText(models.getServiceName());
         holder.displayServiceDescription.setText(models.getServiceDescription());
@@ -58,14 +56,17 @@ public class ServiceBookingAdapter extends RecyclerView.Adapter<ServiceBookingAd
         holder.displayVisitingTime.setText(models.getVisitingTime());
 
         Glide.with(context).load(models.getServiceIconUrl()).placeholder(R.drawable.ic_person).into(holder.serviceIconUrl);
+
+
     }
 
     @Override
     public int getItemCount() {
-        return bookingModels.size();
+        return serviceBookingModals.size();
     }
 
-    public static class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView displayServiceName, displayServiceDescription, totalServices, displayTotalPrice;
         TextView displayTechnicianName, displayTechnicianEmail, displayTechnicianPhoneNumber;
@@ -73,10 +74,9 @@ public class ServiceBookingAdapter extends RecyclerView.Adapter<ServiceBookingAd
         TextView displayStatus, serviceType;
         ImageView serviceIconUrl;
 
-        OnServiceBookingCardClickListener cardClickListener;
+        OnServiceCompletedCardClickListener cardClickListener;
 
-
-        public viewHolder(@NonNull View itemView, OnServiceBookingCardClickListener cardClickListener) {
+        public ViewHolder(@NonNull View itemView, OnServiceCompletedCardClickListener cardClickListener) {
             super(itemView);
 
             displayServiceName = itemView.findViewById(R.id.displayServiceName);
@@ -102,12 +102,16 @@ public class ServiceBookingAdapter extends RecyclerView.Adapter<ServiceBookingAd
         }
 
         @Override
-        public void onClick(View view) {
-            cardClickListener.onBookingCardClick(getAdapterPosition());
+        public void onClick(View v) {
+            cardClickListener.onServiceCompletedListener(getAdapterPosition());
+
         }
 
-        public interface OnServiceBookingCardClickListener{
-            void onBookingCardClick(int position);
+
+        public interface OnServiceCompletedCardClickListener{
+            void onServiceCompletedListener(int position);
         }
     }
+
+
 }

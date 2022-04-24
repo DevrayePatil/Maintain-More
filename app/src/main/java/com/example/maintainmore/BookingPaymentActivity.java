@@ -12,13 +12,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -32,6 +36,8 @@ public class BookingPaymentActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     FirebaseFirestore db ;
     DocumentReference documentReference;
+
+    Calendar calendar;
 
 
     TextView displayTechnicianName, displayTechnicianEmail,displayTechnicianPhoneNumber;
@@ -54,6 +60,9 @@ public class BookingPaymentActivity extends AppCompatActivity {
     String iconUrl;
 
 
+    String paymentDate, paymentTime;
+
+
     @SuppressLint("LongLogTag")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +74,8 @@ public class BookingPaymentActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         userID = Objects.requireNonNull(firebaseUser).getUid();
+
+        calendar = Calendar.getInstance();
 
 
         displayTechnicianName = findViewById(R.id.displayTechnicianName);
@@ -81,8 +92,6 @@ public class BookingPaymentActivity extends AppCompatActivity {
 
         displayWalletBalance = findViewById(R.id.displayWalletBalance);
 
-
-
         buttonCancel = findViewById(R.id.buttonCancel);
         buttonBook = findViewById(R.id.buttonConform);
 
@@ -98,8 +107,15 @@ public class BookingPaymentActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("LongLogTag")
     private void BookService() {
         Map<String,String> bookService = new HashMap<>();
+
+        DocumentReference documentReference =  db.collection("Bookings").document();
+
+        String bookingID = documentReference.getId();
+
+
 
 
         if (numberOfServicesForMale != 0){
@@ -126,18 +142,64 @@ public class BookingPaymentActivity extends AppCompatActivity {
         bookService.put("serviceType",serviceType);
         bookService.put("bookingStatus","Booked");
 
-        db.collection("Bookings").document()
-                .set(bookService).addOnSuccessListener(unused ->
+
+        if (totalWalletBalance >= totalServicesPrice){
+
+
+                documentReference.set(bookService).addOnSuccessListener(unused ->
+
+
                         db.collection("Technicians").document(technicianID)
                         .update("availabilityStatus", "Engaged").addOnSuccessListener(unused1 -> {
 
                             Toast.makeText(this, "Booking Completed", Toast.LENGTH_SHORT).show();
+
+                            Log.i(TAG, "Booking Completed");
+
+
+
                             startActivity(new Intent(this, MainActivity.class));
 
-                }).addOnFailureListener(e -> Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show()))
-                .addOnFailureListener(e ->
-                Toast.makeText(this, "Booking Failed: " + e, Toast.LENGTH_SHORT).show()
-        );
+                }).addOnFailureListener(e -> {
+                            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Log.i(TAG, e.getMessage());
+                        }))
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Booking Failed: " + e, Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, "Booking Failed");
+
+                }
+            );
+
+            totalWalletBalance -= totalServicesPrice;
+
+            Map<String, String> paymentTransaction = new HashMap<>();
+
+            paymentDate = DateFormat.getDateInstance().format(calendar.getTime());
+            paymentTime = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
+
+            paymentTransaction.put("bookingID",bookingID);
+            paymentTransaction.put("whoPaidAmount", userID);
+            paymentTransaction.put("paymentDate",paymentDate);
+            paymentTransaction.put("paymentTime",paymentTime);
+            paymentTransaction.put("amountPaid",String.valueOf(totalServicesPrice));
+            paymentTransaction.put("paymentStatus","Dr");
+
+
+
+            db.collection("Payments").document().set(paymentTransaction).addOnSuccessListener(unused ->
+                Log.i(TAG, "Payment Completed")
+            );
+
+            db.collection("Users").document(userID).update("walletBalanceInINR", String.valueOf(totalWalletBalance))
+                    .addOnSuccessListener(unused -> Toast.makeText(this, "Payment Completed", Toast.LENGTH_SHORT).show())
+                    .addOnFailureListener(e -> Log.e(TAG,"Failed to update balance" + e));
+
+            Log.i(TAG, "Updated Balance: " + totalWalletBalance);
+        }
+        else {
+            Toast.makeText(this, "Insufficient Wallet Balance", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @SuppressLint("LongLogTag")
@@ -154,13 +216,16 @@ public class BookingPaymentActivity extends AppCompatActivity {
         serviceName = intent.getStringExtra("serviceName");
         serviceDescription = intent.getStringExtra("serviceDescription");
 
+
+        String maleServices = intent.getStringExtra("servicesForMale");
+        String femaleServices = intent.getStringExtra("servicesForFemale");
+
         String strTotalServices = intent.getStringExtra("totalServices");
         String strServicePrice = intent.getStringExtra("servicePrice");
         String strTotalServicePrice= intent.getStringExtra("totalServicesPrice");
         String strTotalWalletBalance= intent.getStringExtra("totalWalletBalance");
 
-        Log.i(TAG,"ServiceType: " + serviceType);
-        Log.i(TAG,"Total Services: " + strTotalServices);
+
 
         bookingDate = intent.getStringExtra("bookingDate");
         bookingTime = intent.getStringExtra("bookingTime");
@@ -174,10 +239,19 @@ public class BookingPaymentActivity extends AppCompatActivity {
         totalServicesPrice = Integer.parseInt(strTotalServicePrice);
         totalWalletBalance = Integer.parseInt(strTotalWalletBalance);
 
+        numberOfServicesForMale = Integer.parseInt(maleServices);
+        numberOfServicesForFemale = Integer.parseInt(femaleServices);
 
 
+
+        Log.i(TAG, "Technician ID:" + technicianID);
+        Log.i(TAG,"ServiceType: " + serviceType);
+        Log.i(TAG,"Total Services: " + totalServicesPrice);
+        Log.i(TAG,"Services for Male: " + numberOfServicesForMale);
+        Log.i(TAG,"Services for Female: " + numberOfServicesForFemale);
     }
 
+    @SuppressLint("SetTextI18n")
     private void GetDataFromDatabase(){
 
         documentReference = db.collection("Technicians").document(technicianID);
@@ -187,6 +261,7 @@ public class BookingPaymentActivity extends AppCompatActivity {
                 Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
             }
             if (value != null && value.exists()){
+
                 displayTechnicianName.setText(value.getString("name"));
                 displayTechnicianEmail.setText(value.getString("email"));
                 displayTechnicianPhoneNumber.setText(value.getString("phoneNumber"));
@@ -197,10 +272,11 @@ public class BookingPaymentActivity extends AppCompatActivity {
                 displayRequiredTime.setText(requiredTime);
 
                 displayNumberOfBookings.setText(String.valueOf(totalServices));
-                displayAmountPerBooking.setText(String.valueOf(servicePrice));
-                displayTotalAmount.setText(String.valueOf(totalServicesPrice));
 
-                displayWalletBalance.setText(String.valueOf(totalWalletBalance));
+                displayAmountPerBooking.setText("₹ " + servicePrice);
+                displayTotalAmount.setText("₹ " + totalServicesPrice);
+
+                displayWalletBalance.setText("₹ " + totalWalletBalance);
             }
         });
     }

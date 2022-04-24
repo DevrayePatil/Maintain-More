@@ -8,6 +8,7 @@
     android:layout_margin="@dimen/normal_margin"
     android:padding="@dimen/normal_half_margin"
     app:cardCornerRadius="@dimen/normal_half_margin"
+    android:backgroundTint="#f2f2f7"
     app:cardElevation="10dp"
     >
 
@@ -24,20 +25,21 @@
             android:layout_height="wrap_content"
             android:weightSum="3"
             >
+
             <ImageView
                 android:id="@+id/imageViewIcon"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_margin="@dimen/normal_margin"
+                android:layout_weight="1"
+                android:contentDescription="@string/todo"
                 android:scaleType="centerCrop"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/serviceDetails"
-                android:contentDescription="@string/todo"
-                android:layout_margin="@dimen/normal_margin"
-                tools:src="@drawable/ic_google"
-                android:layout_weight="1"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ImageContrastCheck"
+                tools:src="@drawable/ic_google" />
 
             <LinearLayout
                 android:id="@+id/serviceDetails"
@@ -108,6 +110,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/booking_date"
+                        android:minWidth="100dp"
                         tools:ignore="TextContrastCheck"
                         />
 
@@ -132,7 +135,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/booking_time"
-                        tools:ignore="TextContrastCheck" />
+                        android:minWidth="100dp"
+                  />
 
                     <TextView
                         android:id="@+id/displayBookingTime"
@@ -165,6 +169,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/visiting_date"
+                        android:minWidth="100dp"
                         tools:ignore="TextContrastCheck" />
 
                     <TextView
@@ -187,6 +192,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/visiting_time"
+                        android:minWidth="100dp"
+
                         tools:ignore="TextContrastCheck" />
 
                     <TextView
@@ -219,15 +226,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/total_bookings"
-                        android:textSize="@dimen/booking_card_text_size"
-                        tools:ignore="TextContrastCheck" />
+                        android:minWidth="100dp"
+                        />
 
                     <TextView
                         android:id="@+id/totalServices"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/booking_card_text_size"
-                        tools:ignore="TextContrastCheck"
                         tools:text="5" />
 
                 </LinearLayout>
@@ -244,9 +250,8 @@
                         android:id="@+id/totalServicesPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/normal_margin"
+                        android:minWidth="100dp"
                         android:text="@string/total_price"
-                        android:textSize="@dimen/booking_card_text_size"
                         tools:ignore="TextContrastCheck" />
 
                     <TextView
@@ -274,10 +279,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/normal_margin"
                 android:text="@string/status"
+                android:minWidth="100dp"
                 android:textSize="@dimen/booking_card_text_size"
-                tools:ignore="TextContrastCheck" />
+                />
 
             <TextView
                 android:id="@+id/displayStatus"

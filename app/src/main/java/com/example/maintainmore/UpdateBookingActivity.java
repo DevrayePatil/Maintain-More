@@ -1,5 +1,7 @@
 package com.example.maintainmore;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.splashscreen.SplashScreen;
@@ -8,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,7 +31,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 public class UpdateBookingActivity extends AppCompatActivity {
@@ -43,6 +48,8 @@ public class UpdateBookingActivity extends AppCompatActivity {
     FirebaseFirestore db;
     Calendar calendar;
 
+    String userID;
+
 
     Button buttonCancel, buttonUpdate;
     Button buttonChooseDate, buttonChooseTime;
@@ -56,7 +63,8 @@ public class UpdateBookingActivity extends AppCompatActivity {
     int numberOfServicesForFemale = 0;
     int servicePrice = 0;
     int totalServices = 0;
-    int totalPrice = 0;
+    int totalServicesPrice = 0;
+    int totalWalletBalance = 0;
 
 
     String chosenDate= "";
@@ -69,6 +77,9 @@ public class UpdateBookingActivity extends AppCompatActivity {
     String serviceName, serviceDescription, servicesForMale, servicesForFemale, serviceRequiredTime;
     String visitingDate, visitingTime, totalServiceItems,servicePricePerItem, totalServicePrice;
 
+    String paymentDate, paymentTime;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +89,9 @@ public class UpdateBookingActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
+
+        userID = Objects.requireNonNull(firebaseUser).getUid();
+
         db = FirebaseFirestore.getInstance();
         calendar = Calendar.getInstance();
 
@@ -85,6 +99,12 @@ public class UpdateBookingActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
+        GetUserInfo();
         LinkedViewIDes();
         GetDataFromBookingCard();
         SetDataToView();
@@ -102,6 +122,8 @@ public class UpdateBookingActivity extends AppCompatActivity {
         bookingDate = DateFormat.getDateInstance().format(calendar.getTime());
         bookingTime = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
     }
+
+
 
     @SuppressLint("LongLogTag")
     private void CancelBooking() {
@@ -127,6 +149,33 @@ public class UpdateBookingActivity extends AppCompatActivity {
                         Log.i(TAG, "BookingCanceled");
                         finish();
                     });
+
+                    totalWalletBalance += totalServicesPrice;
+
+                    Map<String, String> paymentTransaction = new HashMap<>();
+
+                    paymentDate = DateFormat.getDateInstance().format(calendar.getTime());
+                    paymentTime = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
+
+                    paymentTransaction.put("bookingID",bookingID);
+                    paymentTransaction.put("whoPaidAmount", userID);
+                    paymentTransaction.put("paymentDate",paymentDate);
+                    paymentTransaction.put("paymentTime",paymentTime);
+                    paymentTransaction.put("amountPaid",String.valueOf(totalServicesPrice));
+                    paymentTransaction.put("paymentStatus","Cr");
+
+
+
+                    db.collection("Payments").document().set(paymentTransaction).addOnSuccessListener(unused ->
+                            Log.i(TAG, "Refund Credited in your Wallet")
+                    );
+
+                    db.collection("Users").document(userID).update("walletBalanceInINR", String.valueOf(totalWalletBalance))
+                            .addOnSuccessListener(unused -> Toast.makeText(this, "Refund Credited in your Wallet", Toast.LENGTH_SHORT).show())
+                            .addOnFailureListener(e -> Log.e(TAG,"Failed to update balance" + e));
+
+                    Log.i(TAG, "Updated Balance: " + totalWalletBalance);
+
                 } else {
                     Log.d(TAG, "No such document");
                 }
@@ -152,15 +201,11 @@ public class UpdateBookingActivity extends AppCompatActivity {
             return;
         }
 
-        if (numberOfServicesForMale != 0){
-            documentReference.update("servicesForMale", String.valueOf(numberOfServicesForMale));
-        }
-        if (numberOfServicesForFemale != 0){
-            documentReference.update("servicesForFemale", String.valueOf(numberOfServicesForFemale));
-        }
 
         documentReference.update(
-                "totalServicesPrice", String.valueOf(totalPrice),
+                "servicesForMale", String.valueOf(numberOfServicesForMale),
+                "servicesForFemale", String.valueOf(numberOfServicesForFemale),
+                "totalServicesPrice", String.valueOf(totalServicesPrice),
                 "totalServices", String.valueOf(totalServices),
                 "servicePrice", String.valueOf(servicePrice),
                 "visitingDate", chosenDate,
@@ -258,8 +303,8 @@ public class UpdateBookingActivity extends AppCompatActivity {
                 numberPickerForFemale.setText(String.valueOf(numberOfServicesForFemale));
                 displayTotalItems.setText(String.valueOf(totalServices));
 
-                totalPrice = servicePrice * totalServices;
-                displayTotalPrice.setText(String.valueOf(totalPrice));
+                totalServicesPrice = servicePrice * totalServices;
+                displayTotalPrice.setText(String.valueOf(totalServicesPrice));
             }
         });
 
@@ -271,8 +316,8 @@ public class UpdateBookingActivity extends AppCompatActivity {
                 numberPickerForFemale.setText(String.valueOf(numberOfServicesForFemale));
                 displayTotalItems.setText(String.valueOf(totalServices));
 
-                totalPrice = servicePrice * totalServices;
-                displayTotalPrice.setText(String.valueOf(totalPrice));
+                totalServicesPrice = servicePrice * totalServices;
+                displayTotalPrice.setText(String.valueOf(totalServicesPrice));
             }
             else {
                 Toast.makeText(this, "You Can't Choose More then 5", Toast.LENGTH_SHORT).show();
@@ -300,8 +345,8 @@ public class UpdateBookingActivity extends AppCompatActivity {
                 numberPickerForMale.setText(String.valueOf(numberOfServicesForMale));
                 displayTotalItems.setText(String.valueOf(totalServices));
 
-                totalPrice = servicePrice * totalServices;
-                displayTotalPrice.setText(String.valueOf(totalPrice));
+                totalServicesPrice = servicePrice * totalServices;
+                displayTotalPrice.setText(String.valueOf(totalServicesPrice));
             }
         });
 
@@ -312,8 +357,8 @@ public class UpdateBookingActivity extends AppCompatActivity {
                 numberPickerForMale.setText(String.valueOf(numberOfServicesForMale));
                 displayTotalItems.setText(String.valueOf(totalServices));
 
-                totalPrice = servicePrice * totalServices;
-                displayTotalPrice.setText(String.valueOf(totalPrice));
+                totalServicesPrice = servicePrice * totalServices;
+                displayTotalPrice.setText(String.valueOf(totalServicesPrice));
             }
             else {
                 Toast.makeText(this, "You Can't Choose More then 5", Toast.LENGTH_SHORT).show();
@@ -335,6 +380,26 @@ public class UpdateBookingActivity extends AppCompatActivity {
         displayServiceTime.setText(visitingTime);
         displayTotalItems.setText(totalServiceItems);
         displayTotalPrice.setText(totalServicePrice);
+    }
+
+    @SuppressLint("LongLogTag")
+    private void GetUserInfo() {
+        db.collection("Users").document(userID)
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            Log.d(TAG, "Balance: " + document.getString("walletBalanceInINR"));
+
+                            totalWalletBalance = Integer.parseInt(Objects.requireNonNull(document.getString("walletBalanceInINR")));
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                });
     }
 
     @SuppressLint("LongLogTag")
@@ -369,7 +434,7 @@ public class UpdateBookingActivity extends AppCompatActivity {
             numberOfServicesForFemale = Integer.parseInt(servicesForFemale);
         }
         totalServices = Integer.parseInt(totalServiceItems);
-        totalPrice = Integer.parseInt(totalServicePrice);
+        totalServicesPrice = Integer.parseInt(totalServicePrice);
         chosenDate = visitingDate;
         chosenTime = visitingTime;
 //        cancellationTime =
@@ -402,4 +467,13 @@ public class UpdateBookingActivity extends AppCompatActivity {
         displayTotalPrice = findViewById(R.id.displayTotalPrice);
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -53,13 +53,13 @@
     <string name="add_item">Add Items</string>
     <string name="cancel_booking">Cancel Booking</string>
     <string name="price_per_item">Price per item</string>
-    <string name="demo_price">0 RS</string>
+    <string name="demo_price">₹ 0</string>
     <string name="default_items">0</string>
-    <string name="total_price">Total Price :</string>
+    <string name="total_price">Total Price</string>
     <string name="total_items">Total Items</string>
 
     <string name="demo_items">0</string>
-    <string name="default_price">256 RS</string>
+    <string name="default_price">₹ 256</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="are_you_sure">Are you sure ?</string>
     <string name="do_you_want_to_sign_out">Do you want to sign out</string>
@@ -86,7 +86,7 @@
     <string name="pick_date">Pick Date</string>
     <string name="service_for_male">Service For Male</string>
     <string name="service_for_female">Service For Female</string>
-    <string name="total_bookings">Total Bookings :</string>
+    <string name="total_bookings">Total Bookings</string>
     <string name="status">Status :</string>
     <string name="update_booking">Update Booking</string>
     <string name="book">Book</string>
@@ -111,6 +111,15 @@
     <string name="booking_time">Booking Time:</string>
     <string name="current_balance">Current Balance</string>
     <string name="transactions">Transactions</string>
+    <string name="payment_date_and_time"><![CDATA[Payment Date & Time]]></string>
+    <string name="payment_date">Payment Date</string>
+    <string name="payment_time">PaymentTime</string>
+    <string name="amount_paid">Amount Paid</string>
+    <string name="technician_name">Technician Name</string>
+    <string name="invoice">Invoice</string>
+    <string name="technician_email">Technician Email</string>
+    <string name="service_name">Service Name</string>
+    <string name="service_price">Service Price</string>
 
 
 </resources>

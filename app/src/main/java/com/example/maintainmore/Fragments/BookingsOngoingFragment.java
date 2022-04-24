@@ -30,7 +30,7 @@ import java.util.Objects;
 public class BookingsOngoingFragment extends Fragment
         implements ServiceBookingAdapter.viewHolder.OnServiceBookingCardClickListener {
 
-    private static final String TAG = "AllBookingFragmentInfo";
+    private static final String TAG = "BookingsOngoingFragment";
 
 
     FirebaseFirestore db;
@@ -42,7 +42,6 @@ public class BookingsOngoingFragment extends Fragment
     public BookingsOngoingFragment() {
         // Required empty public constructor
     }
-
 
     RecyclerView recyclerView_ongoing_bookings;
     ImageView emptyBookings;
@@ -89,7 +88,6 @@ public class BookingsOngoingFragment extends Fragment
             }
             ServiceBookingAdapter bookingAdapter = new ServiceBookingAdapter(bookingModels,getContext(), this);
             recyclerView_ongoing_bookings.setAdapter(bookingAdapter);
-
 
             if(!bookingModels.isEmpty()){
                 recyclerView_ongoing_bookings.setVisibility(View.VISIBLE);
