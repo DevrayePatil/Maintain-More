@@ -120,6 +120,14 @@
     <string name="technician_email">Technician Email</string>
     <string name="service_name">Service Name</string>
     <string name="service_price">Service Price</string>
+    <string name="repair_appliances_services">Repair Appliance Service</string>
+    <string name="card_number">Credit/Debit Card Number</string>
+    <string name="cvv">CVV</string>
+    <string name="expire_date">Expire Date</string>
+    <string name="card_holder_name">Card Holder Name</string>
+    <string name="google_pay">Google Pay</string>
+    <string name="paytm">Paytm</string>
+    <string name="phonepe">PhonePe</string>
 
 
 </resources>

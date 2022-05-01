@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddMoneyToWalletActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:orientation="vertical"
+        >
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_margin"
+            app:cardElevation="@dimen/normal_margin"
+            app:cardCornerRadius="@dimen/normal_margin"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/normal_margin"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:endIconMode="custom"
+                        app:endIconDrawable="@drawable/ic_credit_card"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/card_number"
+
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:baselineAligned="false">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:endIconMode="custom"
+                        app:endIconDrawable="@drawable/ic_calendar_month"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_marginEnd="@dimen/normal_half_margin"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/expire_date"
+
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:endIconMode="custom"
+                        app:endIconDrawable="@drawable/ic_info"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_marginStart="@dimen/normal_half_margin"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/cvv"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:endIconMode="custom"
+                        app:endIconDrawable="@drawable/ic_person"
+                        android:layout_marginBottom="@dimen/normal_margin"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/card_holder_name"
+
+                            />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_money"
+                            android:textAllCaps="false"
+                            android:layout_marginTop="@dimen/normal_margin"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_margin"
+            android:elevation="@dimen/normal_margin"
+            app:cardCornerRadius="@dimen/normal_margin"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_google_pay"
+                    android:contentDescription="@string/todo"
+                    android:layout_weight="1"
+                    android:padding="@dimen/normal_margin"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/google_pay"
+                    android:textSize="28sp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_margin"
+            android:elevation="@dimen/normal_margin"
+            app:cardCornerRadius="@dimen/normal_margin"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_paytm"
+                    android:contentDescription="@string/todo"
+                    android:layout_weight="1"
+                    android:padding="@dimen/normal_margin"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/paytm"
+                    android:textSize="28sp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_margin"
+            android:elevation="@dimen/normal_margin"
+            app:cardCornerRadius="@dimen/normal_margin"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_phonepe"
+                    android:contentDescription="@string/todo"
+                    android:layout_weight="1"
+                    android:padding="@dimen/normal_margin"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/phonepe"
+                    android:textSize="28sp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

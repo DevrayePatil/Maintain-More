@@ -8,10 +8,12 @@
     <uses-permission
         android:name="android.permission.ACCESS_FINE_LOCATION"
         tools:ignore="CoarseFineLocation" />
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29"/>
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
 
     <application
@@ -24,6 +26,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaintainMore.Splash">
         <activity
+            android:name=".AddMoneyToWalletActivity"
+            android:exported="false" />
+        <activity
             android:name=".ServiceCompletedActivity"
             android:exported="false" />
         <activity
@@ -31,8 +36,7 @@
             android:exported="false" />
         <activity
             android:name=".ManageAddressActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".BookingPaymentActivity"
             android:exported="false" />
@@ -41,12 +45,10 @@
             android:exported="false" />
         <activity
             android:name=".WalletActivity"
-            android:exported="false"
-           />
+            android:exported="false" />
         <activity
             android:name=".SettingsActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".EditProfileActivity"
             android:exported="false" />

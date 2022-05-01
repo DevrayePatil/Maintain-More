@@ -28,13 +28,18 @@
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/drawable/bg_search_view.xml" value="0.121" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/drawable/ic_calendar_month.xml" value="0.121" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/drawable/ic_decrement.xml" value="0.121" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/drawable/ic_google_pay.xml" value="0.178" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.204" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/drawable/ic_no_notifications.xml" value="0.204" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/drawable/ic_paytm.xml" value="0.178" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/drawable/ic_phonepe.xml" value="0.178" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/drawable/ic_rupee.xml" value="0.204" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/drawable/ic_rupee_2.xml" value="0.204" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/drawable/profile_background.xml" value="0.156" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/layout/activity_add_money_to_wallet.xml" value="0.25" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/layout/activity_book_service.xml" value="0.24615384615384617" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/layout/activity_booking_payment.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/layout/activity_edit_profile.xml" value="0.25" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/layout/activity_manage_address.xml" value="0.10989583333333333" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/layout/activity_payments.xml" value="0.10989583333333333" />
@@ -55,6 +60,7 @@
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/layout/fragment_cancelled_bookings.xml" value="0.25" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/layout/fragment_cancled_bookings.xml" value="0.25" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/layout/fragment_completed_bookings.xml" value="0.25" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/layout/fragment_notifications.xml" value="0.25" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/layout/fragment_ongoing_booking.xml" value="0.25" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreUser/app/src/main/res/layout/fragment_profile.xml" value="0.25" />

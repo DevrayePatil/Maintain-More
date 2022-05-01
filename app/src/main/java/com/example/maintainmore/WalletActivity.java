@@ -8,8 +8,10 @@ import androidx.core.splashscreen.SplashScreen;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +40,8 @@ public class WalletActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     TextView walletBalanceInINR;
+
+    Button buttonAddMoney;
 
     RecyclerView recycleView_transactions;
 
@@ -68,10 +72,15 @@ public class WalletActivity extends AppCompatActivity {
 
         walletBalanceInINR = findViewById(R.id.walletBalanceInINR);
 
+        buttonAddMoney = findViewById(R.id.buttonAddMoney);
+
         recycleView_transactions = findViewById(R.id.recycleView_transactions);
 
         WalletInformation();
         Transactions();
+
+
+        buttonAddMoney.setOnClickListener(v -> startActivity(new Intent(this, AddMoneyToWalletActivity.class)));
     }
 
     private void Transactions() {

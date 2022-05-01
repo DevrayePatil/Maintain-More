@@ -14,10 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.maintainmore.Adapters.HomeServiceAdapter;
 import com.example.maintainmore.Adapters.ImageSlideAdapter;
 import com.example.maintainmore.Adapters.PersonalServicesAdapter;
+import com.example.maintainmore.Adapters.RepairApplianceAdapter;
 import com.example.maintainmore.Adapters.ServicesAdapter;
 import com.example.maintainmore.BookServiceActivity;
+import com.example.maintainmore.Modals.HomeServiceModal;
+import com.example.maintainmore.Modals.RepairApplianceModal;
 import com.example.maintainmore.Modals.ServiceCardModal;
 import com.example.maintainmore.Modals.PersonalServicesModal;
 import com.example.maintainmore.R;
@@ -32,7 +36,9 @@ import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder.OnServiceClickListener,
-        PersonalServicesAdapter.viewHolder.OnPersonalServiceClickListener
+        PersonalServicesAdapter.viewHolder.OnPersonalServiceClickListener,
+        HomeServiceAdapter.ViewHolder.OnHomeServiceClickListener,
+        RepairApplianceAdapter.ViewHolder.OnRepairAppliancesClickListener
         {
 
     private static final String TAG = "HomeFragmentInfo";
@@ -40,12 +46,15 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
     public HomeFragment() {
         // Required empty public constructor
     }
-    RecyclerView recyclerView_PersonalServices, recyclerView_HomeServices, recyclerView_HomeAppliances;
+    RecyclerView recyclerView_PersonalServices, recyclerView_HomeServices, recyclerView_RepairAppliances;
     SliderView imageSliderCarousel;
 
     FirebaseFirestore db;
 
     ArrayList<PersonalServicesModal> personalServicesModals = new ArrayList<>();
+    ArrayList<HomeServiceModal> homeServiceModals = new ArrayList<>();
+    ArrayList<RepairApplianceModal> repairApplianceModals = new ArrayList<>();
+
     ArrayList<ServiceCardModal> homeServiceServiceCardModels = new ArrayList<>();
 
 
@@ -60,18 +69,18 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
         imageSliderCarousel = view.findViewById(R.id.imageSliderCarousel);
         recyclerView_PersonalServices = view.findViewById(R.id.recycleView_PersonalServices);
         recyclerView_HomeServices = view.findViewById(R.id.recycleView_HomeServices);
-        recyclerView_HomeAppliances = view.findViewById(R.id.recycleView_HomeAppliances);
+        recyclerView_RepairAppliances = view.findViewById(R.id.recycleView_RepairAppliances);
 
         Log.i(TAG,"you are in HomeFragment");
 
 
         ArrayList<ServiceCardModal> imageView = new ArrayList<>();
 
-        imageView.add(new ServiceCardModal(R.drawable.image0,""));
-        imageView.add(new ServiceCardModal(R.drawable.image1,""));
-        imageView.add(new ServiceCardModal(R.drawable.image2,""));
-        imageView.add(new ServiceCardModal(R.drawable.image3,""));
-        imageView.add(new ServiceCardModal(R.drawable.image4,""));
+        imageView.add(new ServiceCardModal(R.drawable.slider_image,""));
+        imageView.add(new ServiceCardModal(R.drawable.slider_image_1,""));
+        imageView.add(new ServiceCardModal(R.drawable.slider_image_2,""));
+        imageView.add(new ServiceCardModal(R.drawable.slider_image_3,""));
+        imageView.add(new ServiceCardModal(R.drawable.slider_image_4,""));
 
         ImageSlideAdapter slideAdapter = new ImageSlideAdapter(imageView, getContext());
         imageSliderCarousel.setSliderAdapter(slideAdapter);
@@ -105,30 +114,47 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
         });
 
 
+        db.collection("Home Services").addSnapshotListener((value, error) -> {
+            homeServiceModals.clear();
+            assert value != null;
+            for (DocumentSnapshot snapshot: value){
+                homeServiceModals.add(new HomeServiceModal(
+                                snapshot.getString("serviceType"), snapshot.getString("serviceName"),
+                                snapshot.getString("serviceDescription"),snapshot.getString("requiredTime"),
+                                snapshot.getString("servicePrice"), snapshot.getString("iconUrl"),
+                                snapshot.getString("backgroundImageUrl")
+                        )
+                );
+            }
+            HomeServiceAdapter homeServiceAdapter = new HomeServiceAdapter(homeServiceModals, getContext(),this);
+            recyclerView_HomeServices.setAdapter(homeServiceAdapter);
 
 
-        homeServiceServiceCardModels.add(new ServiceCardModal(R.drawable.ic_google, "Google"));
-        homeServiceServiceCardModels.add(new ServiceCardModal(R.drawable.ic_google, "Google"));
-        homeServiceServiceCardModels.add(new ServiceCardModal(R.drawable.ic_google, "Google is a service"));
+        });
 
-        ServicesAdapter homeServicesAdapter = new ServicesAdapter(homeServiceServiceCardModels, getContext(),this);
-        recyclerView_HomeServices.setAdapter(homeServicesAdapter);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false );
-        recyclerView_HomeServices.setLayoutManager(layoutManager);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false );
+        recyclerView_HomeServices.setLayoutManager(linearLayoutManager);
 
 
-        ArrayList<ServiceCardModal> homeAppliancesServiceCardModels = new ArrayList<>();
+        db.collection("Personal Services").addSnapshotListener((value, error) -> {
+            repairApplianceModals.clear();
+            assert value != null;
+            for (DocumentSnapshot snapshot: value){
+                repairApplianceModals.add(new RepairApplianceModal(
+                                snapshot.getString("serviceType"), snapshot.getString("serviceName"),
+                                snapshot.getString("serviceDescription"),snapshot.getString("requiredTime"),
+                                snapshot.getString("servicePrice"), snapshot.getString("iconUrl"),
+                                snapshot.getString("backgroundImageUrl")
+                        )
+                );
+            }
+            RepairApplianceAdapter repairApplianceAdapter = new RepairApplianceAdapter(repairApplianceModals, getContext(),this);
+            recyclerView_RepairAppliances.setAdapter(repairApplianceAdapter);
 
-        homeAppliancesServiceCardModels.add(new ServiceCardModal(R.drawable.ic_google, "Google"));
-        homeAppliancesServiceCardModels.add(new ServiceCardModal(R.drawable.ic_google, "Google"));
-        homeAppliancesServiceCardModels.add(new ServiceCardModal(R.drawable.ic_google, "Google is a service"));
-
-        ServicesAdapter homeAppliancesAdapter= new ServicesAdapter(homeAppliancesServiceCardModels, getContext(),this);
-        recyclerView_HomeAppliances.setAdapter(homeAppliancesAdapter);
+        });
 
         LinearLayoutManager HomeAppliancesLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false );
-        recyclerView_HomeAppliances.setLayoutManager(HomeAppliancesLayoutManager);
+        recyclerView_RepairAppliances.setLayoutManager(HomeAppliancesLayoutManager);
 
 
 
@@ -180,4 +206,34 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
         startActivity(intent);
     }
 
+    @Override
+    public void onHomeServiceClickListener(int position) {
+        String name = homeServiceModals.get(position).getName();
+        String description = homeServiceModals.get(position).getDescription();
+        String serviceType = homeServiceModals.get(position).getServiceType();
+        String requiredTime = homeServiceModals.get(position).getTimeRequired();
+        String price = homeServiceModals.get(position).getPrice();
+
+        String iconUrl = homeServiceModals.get(position).getIconUrl();
+        String backgroundImageUrl = homeServiceModals.get(position).getBackgroundImageUrl();
+
+        Intent intent = new Intent(getActivity(), BookServiceActivity.class);
+
+        intent.putExtra("Name", name);
+        intent.putExtra("Description", description);
+        intent.putExtra("ServiceType", serviceType);
+        intent.putExtra("RequiredTime", requiredTime);
+        intent.putExtra("Price", price);
+
+        intent.putExtra("IconUrl",iconUrl);
+        intent.putExtra("BackgroundImageUrl",backgroundImageUrl);
+
+
+        startActivity(intent);
+    }
+
+    @Override
+    public void onRepairApplianceClickListener(int position) {
+
+    }
 }
