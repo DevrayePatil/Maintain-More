@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MaintainMore(User)</string>
+    <string name="app_name">Maintain More</string>
 
     <string name="login">Login</string>
     <string name="signup">Signup</string>

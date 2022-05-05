@@ -29,7 +29,9 @@
     <color name="color_green">#5dc759</color>
     <color name="color_blue">#007bff</color>
 
-    <color name="color_custom_white">#f2f2f2</color>
+    <color name="colorWhite">#f2f2f2</color>
+    <color name="colorBlue">#007bff</color>
+    <color name="colorBlueDark">#0363CA</color>
 
 
 </resources>

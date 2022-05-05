@@ -42,7 +42,6 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:cardBackgroundColor="#0083BD"
                     app:cardCornerRadius="10dp"
 
                     >
@@ -60,7 +59,7 @@
                         app:sliderIndicatorOrientation="horizontal"
                         app:sliderIndicatorPadding="3dp"
                         app:sliderIndicatorRadius="2dp"
-                        app:sliderIndicatorSelectedColor="@color/color_primary"
+                        app:sliderIndicatorSelectedColor="?attr/colorPrimary"
                         app:sliderIndicatorUnselectedColor="#FFF"
                         app:sliderScrollTimeInSec="5"
                         app:sliderStartAutoCycle="true" />
@@ -122,7 +121,7 @@
                         android:id="@+id/textView_HomeServices"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/personal_services"
+                        android:text="@string/home_services"
                         android:textSize="18sp"
                         android:textStyle="bold"
 

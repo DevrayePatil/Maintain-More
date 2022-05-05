@@ -33,6 +33,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -153,6 +154,9 @@ public class EditProfileActivity extends AppCompatActivity {
         String PhoneNumber = Objects.requireNonNull(phoneNumber.getText()).toString();
         String DOB = Objects.requireNonNull(dateOfBirth.getText()).toString();
 
+        Pattern patternMobileNumber = Pattern.compile("(0/91)?[6-9][0-9]{9}");
+
+
 
         if (FullName.equals("")){
             Toast.makeText(this, "Please Enter your Name", Toast.LENGTH_SHORT).show();
@@ -162,6 +166,10 @@ public class EditProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "Please Enter your Phone number", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (!PhoneNumber.matches(String.valueOf(patternMobileNumber))){
+            phoneNumber.setError("Please enter Valid mobile number");
+            return;
+        }
         if (DOB.equals("")){
             Toast.makeText(this, "Please Enter your Date of Birth", Toast.LENGTH_SHORT).show();
             return;
@@ -169,14 +177,17 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
         db.collection("Users").document(userID).update(
-                "serviceName", FullName,
+                "name", FullName,
                 "gender", checkedName,
                 "phoneNumber", PhoneNumber,
                 "dob", DOB
 
 
-        ).addOnSuccessListener(unused ->
-                Toast.makeText(getApplicationContext(), "Profile Updated", Toast.LENGTH_SHORT).show())
+        ).addOnSuccessListener(unused ->{
+                Toast.makeText(getApplicationContext(), "Profile Updated", Toast.LENGTH_SHORT).show();
+                finish();
+        })
+
                 .addOnFailureListener(e ->
                         Toast.makeText(getApplicationContext(), "Failed to create link" + e,
                                 Toast.LENGTH_SHORT).show());
@@ -211,7 +222,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
             }
             if (value != null && value.exists()){
-                fullName.setText(value.getString("serviceName"));
+                fullName.setText(value.getString("name"));
                 email.setText(value.getString("email"));
                 phoneNumber.setText(value.getString("phoneNumber"));
                 dateOfBirth.setText(value.getString("dob"));

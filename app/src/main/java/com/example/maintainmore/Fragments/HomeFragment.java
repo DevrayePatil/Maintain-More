@@ -136,7 +136,7 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
         recyclerView_HomeServices.setLayoutManager(linearLayoutManager);
 
 
-        db.collection("Personal Services").addSnapshotListener((value, error) -> {
+        db.collection("Repair Appliance Services").addSnapshotListener((value, error) -> {
             repairApplianceModals.clear();
             assert value != null;
             for (DocumentSnapshot snapshot: value){
@@ -235,5 +235,27 @@ public class HomeFragment extends Fragment implements ServicesAdapter.viewHolder
     @Override
     public void onRepairApplianceClickListener(int position) {
 
+        String name = repairApplianceModals.get(position).getName();
+        String description = repairApplianceModals.get(position).getDescription();
+        String serviceType = repairApplianceModals.get(position).getServiceType();
+        String requiredTime = repairApplianceModals.get(position).getTimeRequired();
+        String price = repairApplianceModals.get(position).getPrice();
+
+        String iconUrl = repairApplianceModals.get(position).getIconUrl();
+        String backgroundImageUrl = repairApplianceModals.get(position).getBackgroundImageUrl();
+
+        Intent intent = new Intent(getActivity(), BookServiceActivity.class);
+
+        intent.putExtra("Name", name);
+        intent.putExtra("Description", description);
+        intent.putExtra("ServiceType", serviceType);
+        intent.putExtra("RequiredTime", requiredTime);
+        intent.putExtra("Price", price);
+
+        intent.putExtra("IconUrl",iconUrl);
+        intent.putExtra("BackgroundImageUrl",backgroundImageUrl);
+
+
+        startActivity(intent);
     }
 }

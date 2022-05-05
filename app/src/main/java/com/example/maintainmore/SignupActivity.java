@@ -17,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -25,7 +26,8 @@ public class SignupActivity extends AppCompatActivity {
 
     private static final String TAG = "Signup";
 
-    String EmailIdPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    String stringEmail = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    String stringPassword = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,20}$";
 
     FirebaseAuth firebaseAuth;
     FirebaseFirestore db;
@@ -74,6 +76,11 @@ public class SignupActivity extends AppCompatActivity {
         String Password = password.getText().toString().trim();
         String conformPassword = rePassword.getText().toString().trim();
 
+        Pattern patternEmail = Pattern.compile(stringEmail);
+        Pattern patternPassword = Pattern.compile(stringPassword);
+
+
+
         if (TextUtils.isEmpty(userName)){
             fullName.setError("Please Enter UserName");
             return;
@@ -82,12 +89,16 @@ public class SignupActivity extends AppCompatActivity {
             email.setError("Please Enter EmailId");
             return;
         }
-        else if (!emailId.matches(EmailIdPattern)){
+        else if (!emailId.matches(String.valueOf(patternEmail))){
             email.setError("Please enter valid EmailId");
             return;
         }
         else if (TextUtils.isEmpty(Password)){
             password.setError("Please Enter Password");
+            return;
+        }
+        if (Password.matches(String.valueOf(patternPassword))){
+            email.setError("Please enter valid EmailId");
             return;
         }
         else if (TextUtils.isEmpty(conformPassword)){
